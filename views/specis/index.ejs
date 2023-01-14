@@ -3,11 +3,41 @@
 
 <main>
   <h1><%= title %></h1>
+  <section class="fish-data">
   <% if(specis.length) {%>
     <% specis.forEach(fishData => { %>
-      
+      <div class="card" style="width: 18rem;">
+        <img src="<%= fishData.avatar %>" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title"><%= fishData.name %></h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Keeper: <%= fishData.keeperLength %> </li>
+          <li class="list-group-item">Season Start: <%= fishData.seasonStartDate %></li>
+          <li class="list-group-item">End: <%= fishData.seasonEndtDate %></li>
+        </ul>
+        <div class="card-body">
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div>
     <% }) %>
   <% } %>
+  </section>
+  <form action="/specis/new" method="POST">
+    <label for="specis-name">Name:</label>
+    <input type="text" name="name" id="specis-name">
+    <label for="specis-avatar">AvatarURL:</label>
+    <input type="text" name="avatar" id="specis-avatar">
+    <label for="specis-keeper">Keeper Length:</label>
+    <input type="text" name="keeperLength" id="specis-keeper">
+    <label for="specis-seasonS">Season Start:</label>
+    <input type="date" name="seasonStartDate" id="specis-seasonS">
+    <label for="specis-seasonE">Season End:</label>
+    <input type="date" name="seasonEndDate" id="specis-seasonE">
+    <button type="submit">Add Data</button>
+  </form>
 </main>
 
 <%- include('../partials/footer') %>

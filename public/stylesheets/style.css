@@ -95,3 +95,8 @@ nav > a {
 .profile-avatar {
   margin-top: 50px;
 }
+
+.fish-data {
+  display: flex;
+  flex-wrap: wrap;
+}

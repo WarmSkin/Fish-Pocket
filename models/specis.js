@@ -5,9 +5,9 @@ const Schema = mongoose.Schema
 const SpecisSchema = new Schema({
   name: String,
   avatar: String,
+  keeperLength: String,
   seasonStartDate: Date,
   seasonEndDate: Date,
-  lengthToKeep: Number,
   habits: {type: Schema.Types.ObjectId, ref: "Habit"}
 }, {
   timestamps: true
