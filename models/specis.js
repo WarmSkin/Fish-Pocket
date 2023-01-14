@@ -8,7 +8,7 @@ const SpecisSchema = new Schema({
   seasonStartDate: Date,
   seasonEndDate: Date,
   lengthToKeep: Number,
-  habits: {type: Schema.Types.ObjectIdct, ref: "Habit"}
+  habits: {type: Schema.Types.ObjectId, ref: "Habit"}
 }, {
   timestamps: true
 })
