@@ -101,7 +101,13 @@ nav > a {
   flex-wrap: wrap;
 }
 
+.fish-data > div {
+  margin-left: 0.5vw;
+  margin-right: 0.5vw;
+}
+
 #edit-form {
   display: flex;
   flex-direction: column;
 }
+

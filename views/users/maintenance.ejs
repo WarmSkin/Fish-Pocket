@@ -1,0 +1,80 @@
+<%- include('../partials/html-head') %>
+<%- include('../partials/nav') %>
+
+<main>
+  <h1><%= title %></h1>
+  <section class="fish-data">
+    <% if(specis.length) {%>
+      <% specis.forEach(fishData => { %>
+        <div class="card" style="width: 18rem;">
+          <img src="<%= fishData.avatar %>" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title"><%= fishData.name %></h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Keeper: <%= fishData.keeperLength %> </li>
+            <li class="list-group-item">Season Start: <%= fishData.seasonStartDate.toJSON().slice(0, 10) %></li>
+            <li class="list-group-item">End: <%= fishData.seasonEndDate.toJSON().slice(0, 10) %></li>
+          </ul>
+          <div class="card-body">
+            <a href="/specis/<%= fishData._id %>/edit"><button>Edit</button></a>
+            <form 
+              action="/specis/<%= fishData._id %>?_method=DELETE" 
+              method="POST"
+            >
+              <button>Delete</button>
+            </form>
+          </div>
+        </div>
+      <% }) %>
+    <% } %>
+    <form action="/specis/new" method="POST" id="edit-form">
+      <label for="specis-name">Name:</label>
+      <input type="text" name="name" id="specis-name">
+      <label for="specis-avatar">AvatarURL:</label>
+      <input type="text" name="avatar" id="specis-avatar">
+      <label for="specis-keeper">Keeper Length:</label>
+      <input type="text" name="keeperLength" id="specis-keeper">
+      <label for="specis-seasonS">Season Start:</label>
+      <input type="date" name="seasonStartDate" id="specis-seasonS">
+      <label for="specis-seasonE">Season End:</label>
+      <input type="date" name="seasonEndDate" id="specis-seasonE">
+      <button type="submit">Add Data</button>
+    </form>
+  </section>
+  <section class="fish-data">
+    <% if(habits.length) {%>
+      <% habits.forEach(habit => { %>
+        <div class="card" style="width: 18rem;">
+          <img src="<%=  %>" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title"><%= habit.name %></h5>
+            <p class="card-text"><%= habit.content %></p>
+          </div>
+          <div class="card-body">
+            <a href="/users/<%= habit._id %>/editH"><button>Edit</button></a>
+            <form 
+              action="/users/<%= habit._id %>/h?_method=DELETE" 
+              method="POST"
+            >
+              <button>Delete</button>
+            </form>
+          </div>
+        </div>
+      <% }) %>
+    <% } %>
+    <div>
+      <h3>Add New Habit</h3>
+      <form action="/users/habits" method="Post" id="edit-form">
+        <label for="habit-name">Name: </label>
+        <input type="text" name="name" id="habit-name">
+        <label for="habit-content">Content: </label>
+        <textarea name="content" id="habit-content" cols="30" rows="5"></textarea>
+        <button type="submit">Add Habit</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>

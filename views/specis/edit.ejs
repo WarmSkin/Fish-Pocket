@@ -25,19 +25,22 @@
           </form>
         </div>
       </div>
-      <form action="/specis/<%= fishData._id %>/?_method=PUT" method="POST" id="edit-form">
-        <label for="specis-name">Name:</label>
-        <input type="text" name="name" id="specis-name" value="<%= fishData.name %>">
-        <label for="specis-avatar">AvatarURL:</label>
-        <input type="text" name="avatar" id="specis-avatar" value="<%= fishData.avatar %>">
-        <label for="specis-keeper">Keeper Length:</label>
-        <input type="text" name="keeperLength" id="specis-keeper" value="<%= fishData.keeperLength %>">
-        <label for="specis-seasonS">Season Start:</label>
-        <input type="date" name="seasonStartDate" id="specis-seasonS" value="<%= fishData.seasonStartDate.toJSON().slice(0, 10) %>">
-        <label for="specis-seasonE">Season End:</label>
-        <input type="date" name="seasonEndDate" id="specis-seasonE" value="<%= fishData.seasonEndDate.toJSON().slice(0, 10) %>">
-        <button type="submit">Update</button>
-      </form>
+      <div>
+        <form action="/specis/<%= fishData._id %>/?_method=PUT" method="POST" id="edit-form">
+          <label for="specis-name">Name:</label>
+          <input type="text" name="name" id="specis-name" value="<%= fishData.name %>">
+          <label for="specis-avatar">AvatarURL:</label>
+          <input type="text" name="avatar" id="specis-avatar" value="<%= fishData.avatar %>">
+          <label for="specis-keeper">Keeper Length:</label>
+          <input type="text" name="keeperLength" id="specis-keeper" value="<%= fishData.keeperLength %>">
+          <label for="specis-seasonS">Season Start:</label>
+          <input type="date" name="seasonStartDate" id="specis-seasonS" value="<%= fishData.seasonStartDate.toJSON().slice(0, 10) %>">
+          <label for="specis-seasonE">Season End:</label>
+          <input type="date" name="seasonEndDate" id="specis-seasonE" value="<%= fishData.seasonEndDate.toJSON().slice(0, 10) %>">
+          <button type="submit">Update</button>
+        </form>
+        
+      </div>
   </section>
 </main>
 

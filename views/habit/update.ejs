@@ -1,0 +1,36 @@
+<%- include('../partials/html-head') %>
+<%- include('../partials/nav') %>
+
+<main>
+  <h1><%= title %></h1>
+  <section class="fish-data">
+    <div class="card" style="width: 18rem;">
+      <img src="<%=  %>" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title"><%= habit.name %></h5>
+        <p class="card-text"><%= habit.content %></p>
+      </div>
+      <div class="card-body">
+        <a href="/users/maintenance"><button>Go Back</button></a>
+        <form 
+          action="/users/<%= habit._id %>/h?_method=DELETE" 
+          method="POST"
+        >
+          <button>Delete</button>
+        </form>
+      </div>
+    </div>
+    <div>
+      <h3>Add New Habit</h3>
+      <form action="/users/<%= habit._id %>/updateH?_method=PUT" method="Post" id="edit-form">
+        <label for="habit-name">Name: </label>
+        <input type="text" name="name" id="habit-name" value="<%= habit.name %>">
+        <label for="habit-content">Content: </label>
+        <textarea name="content" id="habit-content" cols="30" rows="5"><%= habit.content %></textarea>
+        <button type="submit">Update</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>
