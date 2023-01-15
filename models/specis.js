@@ -12,7 +12,6 @@ const SpecisSchema = new Schema({
 }, {
   timestamps: true
 })
-
 const Specis = mongoose.model('Specis', SpecisSchema)
 
 export {

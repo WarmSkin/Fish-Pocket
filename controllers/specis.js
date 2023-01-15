@@ -22,7 +22,19 @@ function newSpecis(req, res) {
   })
 }
 
+function deleteSpecis(req, res) {
+  Specis.findByIdAndDelete(req.params.id)
+  .then(specis => {
+    res.redirect('/specis')
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect('/specis')
+  })
+}
+
 export {
     index,
     newSpecis as new,
+    deleteSpecis as delete,
 }

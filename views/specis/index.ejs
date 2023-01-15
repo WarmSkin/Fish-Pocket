@@ -14,12 +14,22 @@
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">Keeper: <%= fishData.keeperLength %> </li>
-          <li class="list-group-item">Season Start: <%= fishData.seasonStartDate %></li>
-          <li class="list-group-item">End: <%= fishData.seasonEndtDate %></li>
+          <li class="list-group-item">Season Start: <%= fishData.seasonStartDate.toLocaleDateString() %></li>
+          <li class="list-group-item">End: <%= fishData.seasonEndDate.toLocaleDateString() %></li>
         </ul>
         <div class="card-body">
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
+          <form
+            action=""
+            method="POST"
+          >
+          <a href="#" class="card-link"><button>Edit</button></a>
+          </form>
+          <form 
+            action="/specis/<%= fishData._id %>?_method=DELETE" 
+            method="POST"
+          >
+          <a href="#" class="card-link"><button>Delete</button></a>
+          </form>
         </div>
       </div>
     <% }) %>
