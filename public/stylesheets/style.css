@@ -100,3 +100,8 @@ nav > a {
   display: flex;
   flex-wrap: wrap;
 }
+
+#edit-form {
+  display: flex;
+  flex-direction: column;
+}
