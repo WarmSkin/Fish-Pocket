@@ -6,9 +6,9 @@ const FishSchema = new Schema({
   name: String,
   length: Number,
   caughtDate: Date,
-  specis:  {type: Schema.Types.ObjectId, ref: "Specis"},
-  owner: {type: Schema.Types.ObjectId, ref: "Profile"},
-  comments: {type: Schema.Types.ObjectId, ref: "Comment"},
+  specis:  [{type: Schema.Types.ObjectId, ref: "Specis"}],
+  owner: [{type: Schema.Types.ObjectId, ref: "Profile"}],
+  comments: [{type: Schema.Types.ObjectId, ref: "Comment"}],
 }, {
   timestamps: true
 })

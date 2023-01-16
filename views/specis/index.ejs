@@ -10,38 +10,24 @@
         <img src="<%= fishData.avatar %>" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title"><%= fishData.name %></h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <p class="card-text"><%= fishData.content %></p>
         </div>
         <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <% if(fishData.habits.length) {%>
+              <% fishData.habits.forEach(habit => { %>
+                  <button><%= habit.name %></button>
+                </form>
+              <% }) %>
+            <% } %>
+          </li>
           <li class="list-group-item">Keeper: <%= fishData.keeperLength %> </li>
           <li class="list-group-item">Season Start: <%= fishData.seasonStartDate.toJSON().slice(0, 10) %></li>
           <li class="list-group-item">End: <%= fishData.seasonEndDate.toJSON().slice(0, 10) %></li>
         </ul>
-        <div class="card-body">
-          <a href="/specis/<%= fishData._id %>/edit"><button>Edit</button></a>
-          <form 
-            action="/specis/<%= fishData._id %>?_method=DELETE" 
-            method="POST"
-          >
-            <button>Delete</button>
-          </form>
-        </div>
       </div>
     <% }) %>
   <% } %>
-  <form action="/specis/new" method="POST" id="edit-form">
-    <label for="specis-name">Name:</label>
-    <input type="text" name="name" id="specis-name">
-    <label for="specis-avatar">AvatarURL:</label>
-    <input type="text" name="avatar" id="specis-avatar">
-    <label for="specis-keeper">Keeper Length:</label>
-    <input type="text" name="keeperLength" id="specis-keeper">
-    <label for="specis-seasonS">Season Start:</label>
-    <input type="date" name="seasonStartDate" id="specis-seasonS">
-    <label for="specis-seasonE">Season End:</label>
-    <input type="date" name="seasonEndDate" id="specis-seasonE">
-    <button type="submit">Add Data</button>
-  </form>
   </section>
 </main>
 

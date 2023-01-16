@@ -10,7 +10,7 @@
           <img src="<%= fishData.avatar %>" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title"><%= fishData.name %></h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <p class="card-text"><%= fishData.content %></p>
           </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">Keeper: <%= fishData.keeperLength %> </li>
@@ -40,6 +40,8 @@
       <input type="date" name="seasonStartDate" id="specis-seasonS">
       <label for="specis-seasonE">Season End:</label>
       <input type="date" name="seasonEndDate" id="specis-seasonE">
+      <label for="specis-content">Content:</label>
+      <textarea name="content" id="specis-content" cols="30" rows="10"></textarea>
       <button type="submit">Add Data</button>
     </form>
   </section>

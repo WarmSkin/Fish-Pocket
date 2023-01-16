@@ -1,14 +1,19 @@
 import { Specis } from "../models/specis.js";
+import { Habit } from "../models/habit.js";
 
 function index(req, res) {
   Specis.find({})
-    .then(specis => {
-      res.render('specis/index', { 
-        title: "FishData Page",
-        specis,
-      })
-
+  .populate('habits')
+  .then(specis => {
+    res.render('specis/index', { 
+      title: "FishData Page",
+      specis,
     })
+  })
+  .catch(error => {
+    console.log(error),
+    res.redirect('/')
+  })
 }
 
 function newSpecis(req, res) {
@@ -39,11 +44,24 @@ function deleteSpecis(req, res) {
 
 function edit(req, res) {
   Specis.findById(req.params.id)
+  .populate('habits')
   .then(fishData => {
-    res.render('specis/edit', {
-      title: "Fish Data",
-      fishData,
+    Habit.find({_id: {$nin: fishData.habits}})
+    .then(habits => {
+      res.render('specis/edit', {
+        title: "Fish Data",
+        fishData,
+        habits,
+      })
     })
+    .catch(error => {
+      console.log(error)
+      res.redirect('/')
+    })
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect('/')
   })
 }
 
@@ -62,10 +80,50 @@ function update(req, res) {
   })
 }
 
+function addHabit(req, res) {
+  Specis.findById(req.params.id)
+  .then(fishData => {
+    fishData.habits.push(req.params.hid)
+    fishData.save()
+    .then(fishData => {
+      res.redirect(`/specis/${fishData._id}/edit`)
+    })
+    .catch(error => {
+      console.log(error)
+      res.redirect(`/specis/${fishData._id}/edit`)
+    })
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect(`/specis/${fishData._id}/edit`)
+  })
+}
+
+function deleteHabit(req, res) {
+  Specis.findById(req.params.id)
+  .then(fishData => {
+    fishData.habits.remove(req.params.hid)
+    fishData.save()
+    .then(fishData => {
+      res.redirect(`/specis/${fishData._id}/edit`)
+    })
+    .catch(error => {
+      console.log(error)
+      res.redirect(`/specis/${fishData._id}/edit`)
+    })
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect(`/specis/${fishData._id}/edit`)
+  })
+}
+
 export {
     index,
     newSpecis as new,
     deleteSpecis as delete,
     edit,
     update,
+    addHabit,
+    deleteHabit,
 }

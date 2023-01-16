@@ -4,11 +4,12 @@ const Schema = mongoose.Schema
 
 const SpecisSchema = new Schema({
   name: String,
+  content: String,
   avatar: String,
   keeperLength: String,
   seasonStartDate: Date,
   seasonEndDate: Date,
-  habits: {type: Schema.Types.ObjectId, ref: "Habit"}
+  habits: [{type: Schema.Types.ObjectId, ref: "Habit"}]
 }, {
   timestamps: true
 })
