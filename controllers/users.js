@@ -9,6 +9,7 @@ function index(req, res) {
 
 function maintenance(req, res) {
   Specis.find({})
+  .populate('habits')
   .then(specis => {
     Habit.find({})
     .then(habits => {
