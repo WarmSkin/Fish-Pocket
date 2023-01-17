@@ -157,9 +157,16 @@ function updateHabit(req, res) {
 }
 
 function addFriend(req, res) {
-  req.user.profile.friends.push(req.params.pId)
-  req.user.profile.save()
-  res.redirect('/users')
+  Profile.findById(req.user.profile.id)
+  .then(profile => {
+    profile.friends.push(req.params.pId)
+    profile.save()
+    res.redirect('/users')
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect('/users')
+  })
 }
 
 function show(req, res) {
@@ -168,14 +175,50 @@ function show(req, res) {
   .populate('fishing')
   .populate('comments')
   .then(profile => {
-    res.render('users/show', { 
-      title: "User Page",
-      profile,
+    Specis.find({})
+    .then(specis => {
+      res.render('users/show', { 
+        title: "User Page",
+        profile,
+        specis,
+      })
+    })
+    .catch(error => {
+      console.log(error)
+      res.redirect('/')
     })
   })
   .catch(error => {
     console.log(error)
     res.redirect('/')
+  })
+}
+
+function addFish(req, res) {
+  console.log("!!!!", req.body)
+  Profile.findById(req.params.pid)
+  .then(profile => {
+    Fish.create(req.body)
+    .then(fish => {
+      // fish.specis = {req.body.specis}
+      profile.fishing.push(fish._id)
+      profile.save()
+      .then(profile => {
+        res.redirect('/users/mypage')
+      })
+      .catch(error => {
+        console.log(error)
+        res.redirect('/users/mypage')
+      })
+    })
+    .catch(error => {
+      console.log(error)
+      res.redirect('/users/mypage')
+    })
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect('/users/mypage')
   })
 }
 
@@ -191,4 +234,5 @@ export {
     updateHabit,
     addFriend,
     show,
+    addFish,
 }
