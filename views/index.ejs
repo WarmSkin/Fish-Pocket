@@ -2,14 +2,58 @@
 <%- include('./partials/nav') %>
 
 <main>
-  <h1>hello, <%= user ? user.profile.name : "friend" %></h1>
-  <% if (user?.profile.avatar) { %>
-    <div>
-      <img
-        src="<%= user.profile.avatar %>"
-        alt="<%= user.profile.name %> avatar"
-      />
+  <h1>hello, <%= user ? "" : "friend" %></h1>
+  <% if (user) { %>
+  <section class="fish-data">
+    <div class="card" style="width: 18rem;">
+      <img src="<%= user.profile.avatar %>" class="card-img-top" alt="<%= user.profile.name %> avatar">
+      <div class="card-body">
+        <h5 class="card-title"><%= user.profile.name %></h5>
+        <p class="card-text"><%= user.profile.mood %></p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Friends:
+          <% if(user.profile.friends?.length) {%>
+            <% user.profile.friends.forEach(friend => { %>
+                <button><%= friend.name %></button>
+              </form>
+            <% }) %>
+          <% } else { %>
+            You are alone!
+          <% } %> 
+        </li>
+        <li class="list-group-item">Fishing: 
+          <% if(user.profile.fishing?.length) {%>
+            <% user.profile.fishing.forEach(fish => { %>
+                <button><%= fish.name %></button>
+              </form>
+            <% }) %>
+          <% } else { %>
+            You caught none!
+          <% } %>
+        </li>
+        <li class="list-group-item">Comments: 
+          <% if(user.profile.comments?.length) {%>
+            <% user.profile.comments.forEach(comment => { %>
+                <button><%= comment.content %></button>
+              </form>
+            <% }) %>
+          <% } else { %>
+            You don't have any comment!
+          <% } %>
+        </li>
+      </ul>
+      <div class="card-body">
+        <a href="/users/<%= user._id %>/edit"><button>Edit</button></a>
+        <form 
+          action="/users/<%= user._id %>/u?_method=DELETE" 
+          method="POST"
+        >
+          <button>Delete</button>
+        </form>
+      </div>
     </div>
+  </section>
   <% } %>
 </main>
 

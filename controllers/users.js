@@ -2,6 +2,7 @@ import { User } from "../models/user.js";
 import { Habit } from "../models/habit.js";
 import { Fish } from "../models/fish.js";
 import { Specis } from "../models/specis.js";
+import { Profile } from "../models/profile.js";
 
 function index(req, res) {
   res.render("users/index", { title: "Users Page" })
@@ -80,8 +81,27 @@ function updateHabit(req, res) {
   })
 }
 
+function deleteUser(req, res) {
+  User.findByIdAndDelete(req.params.id)
+  .then(user => {
+    Profile.findByIdAndDelete(user.profile._id)
+    .then(user => {
+        res.redirect('/')
+      })
+    .catch(error => {
+      console.log(error)
+      res.redirect('/')
+    })
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect('/')
+  })
+}
+
 export {
     index,
+    deleteUser as delete,
     maintenance,
     createHabit,
     deleteHabit,
