@@ -5,7 +5,7 @@ import { Specis } from "../models/specis.js";
 import { Profile } from "../models/profile.js";
 
 function index(req, res) {
-  User.find({})
+  User.find({_id: {$nin: req.user._id}})
   .populate('profile', 'name avatar mood fishing')
   .then(users => {
     Profile.find({})
@@ -13,6 +13,7 @@ function index(req, res) {
     .then(profiles => {
       res.render("users/index", { 
         title: "All Users",
+        myProfile: req.user.profile,
         users,
        })
     })
@@ -141,6 +142,12 @@ function updateHabit(req, res) {
   })
 }
 
+function addFriend(req, res) {
+  req.user.profile.friends.push(req.params.pId)
+  req.user.profile.save()
+  res.redirect('/users')
+}
+
 export {
     index,
     deleteUser as delete,
@@ -151,4 +158,5 @@ export {
     deleteHabit,
     editHabit,
     updateHabit,
+    addFriend,
 }

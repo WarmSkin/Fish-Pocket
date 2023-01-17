@@ -58,11 +58,16 @@ passport.serializeUser(function (user, done) {
 
 passport.deserializeUser(function (userId, done) {
   User.findById(userId)
-  .populate('profile')
-  .then(user => {
-    console.log(user);
-    done(null, user)
+  .populate({
+    path: 'profile',
+    populate: { path: 'friends'},
+    // { path:  },
+    // { path:  },
   })
+  .then(user => {
+      console.log(user);
+      done(null, user)
+    })
   .catch(err => {
     done(err, null)
   })
