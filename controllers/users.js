@@ -8,6 +8,28 @@ function index(req, res) {
   res.render("users/index", { title: "Users Page" })
 }
 
+function deleteUser(req, res) {
+  User.findByIdAndDelete(req.params.id)
+  .then(user => {
+    Profile.findByIdAndDelete(user.profile._id)
+    .then(user => {
+        res.redirect('/')
+      })
+    .catch(error => {
+      console.log(error)
+      res.redirect('/')
+    })
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect('/')
+  })
+}
+
+function editUser(req, res) {
+  res.render('users/edit', { title: "Update Your Information" })
+}
+
 function maintenance(req, res) {
   Specis.find({})
   .populate('habits')
@@ -81,27 +103,10 @@ function updateHabit(req, res) {
   })
 }
 
-function deleteUser(req, res) {
-  User.findByIdAndDelete(req.params.id)
-  .then(user => {
-    Profile.findByIdAndDelete(user.profile._id)
-    .then(user => {
-        res.redirect('/')
-      })
-    .catch(error => {
-      console.log(error)
-      res.redirect('/')
-    })
-  })
-  .catch(error => {
-    console.log(error)
-    res.redirect('/')
-  })
-}
-
 export {
     index,
     deleteUser as delete,
+    editUser,
     maintenance,
     createHabit,
     deleteHabit,
