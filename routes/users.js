@@ -10,6 +10,7 @@ router.get('/:id/editH', usersCtrl.editHabit)
 router.get('/maintenance', usersCtrl.maintenance)
 router.delete('/:id/u', usersCtrl.delete)
 router.delete('/:id/h', usersCtrl.deleteHabit)
+router.put('/:id/updateUser', usersCtrl.updateUser)
 router.put('/:id/updateH', usersCtrl.updateHabit)
 
 export {

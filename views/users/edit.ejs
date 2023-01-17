@@ -3,12 +3,13 @@
 
 <main>
   <h1>Update Information</h1>
-  <section class="fish-data">
+  <section class="data">
     <div class="card" style="width: 18rem;">
       <img src="<%= user.profile.avatar %>" class="card-img-top" alt="<%= user.profile.name %> avatar">
       <div class="card-body">
         <h5 class="card-title"><%= user.profile.name %></h5>
-        <p class="card-text">Mood:<%= user.profile.mood ? user.profile.mood : "Don't feel like saying anything." %></p>
+        <% console.dir(user.profile) %> 
+        <p class="card-text">Mood:<%= user.profile.mood %></p>
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">Friends:
@@ -51,6 +52,17 @@
           <button>Delete</button>
         </form>
       </div>
+    </div>
+    <div>
+      <form action="/users/<%= user._id %>/updateUser?_method=PUT" method="POST" id="edit-form">
+        <label for="user-name">Name:</label>
+        <input type="text" name="name" id="user-name" value="<%= user.profile.name %>">
+        <label for="user-avatar">AvatarURL:</label>
+        <input type="text" name="avatar" id="user-avatar" value="<%= user.profile.avatar %>">
+        <label for="user-mood">Mood:</label>
+      <textarea name="mood" id="user-mood" cols="30" rows="10"><%= user.profile.mood %></textarea>
+        <button type="submit">Update</button>
+      </form>
     </div>
   </section>
 </main>

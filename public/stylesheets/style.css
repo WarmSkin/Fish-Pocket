@@ -96,12 +96,12 @@ nav > a {
   margin-top: 50px;
 }
 
-.fish-data {
+.data {
   display: flex;
   flex-wrap: wrap;
 }
 
-.fish-data > div {
+.data > div {
   margin-left: 0.5vw;
   margin-right: 0.5vw;
 }

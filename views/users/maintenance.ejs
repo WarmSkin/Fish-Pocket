@@ -3,7 +3,7 @@
 
 <main>
   <h1><%= title %></h1>
-  <section class="fish-data">
+  <section class="data">
     <% if(specis.length) {%>
       <% specis.forEach(fishData => { %>
         <div class="card" style="width: 18rem;">
@@ -53,7 +53,7 @@
       <button type="submit">Add Data</button>
     </form>
   </section>
-  <section class="fish-data">
+  <section class="data">
     <% if(habits.length) {%>
       <% habits.forEach(habit => { %>
         <div class="card" style="width: 18rem;">

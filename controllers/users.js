@@ -30,6 +30,25 @@ function editUser(req, res) {
   res.render('users/edit', { title: "Update Your Information" })
 }
 
+function updateUser(req, res) {
+  User.findById(req.params.id)
+  .then(user => {
+    console.log(req.body)
+    Profile.findByIdAndUpdate(user.profile._id, req.body)
+    .then(profile => {
+      res.redirect(`/users/${user._id}/edit`)
+    })
+    .catch(error => {
+      console.log(error)
+      res.redirect(`/users/${user._id}/edit`)
+    })
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect(`/users/${user._id}/edit`)
+  })
+}
+
 function maintenance(req, res) {
   Specis.find({})
   .populate('habits')
@@ -107,6 +126,7 @@ export {
     index,
     deleteUser as delete,
     editUser,
+    updateUser,
     maintenance,
     createHabit,
     deleteHabit,
