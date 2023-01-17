@@ -3,6 +3,7 @@ import { Habit } from "../models/habit.js";
 import { Fish } from "../models/fish.js";
 import { Specis } from "../models/specis.js";
 import { Profile } from "../models/profile.js";
+import { Comment } from "../models/comment.js";
 
 function index(req, res) {
   User.find({_id: {$nin: req.user._id}})
@@ -32,7 +33,7 @@ function deleteUser(req, res) {
   User.findByIdAndDelete(req.params.id)
   .then(user => {
     Profile.findByIdAndDelete(user.profile._id)
-    .then(user => {
+    .then(profile => {
         res.redirect('/')
       })
     .catch(error => {
@@ -47,7 +48,20 @@ function deleteUser(req, res) {
 }
 
 function editUser(req, res) {
-  res.render('users/edit', { title: "Update Your Information" })
+  Profile.findById(req.user.profile._id)
+  .populate('friends')
+  .populate('fishing')
+  .populate('comments')
+  .then(profile => {
+    res.render('users/edit', { 
+      title: "Update Your Information",
+      profile,
+    })
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect('/')
+  })
 }
 
 function updateUser(req, res) {
@@ -148,6 +162,23 @@ function addFriend(req, res) {
   res.redirect('/users')
 }
 
+function show(req, res) {
+  Profile.findById(req.user.profile._id)
+  .populate('friends')
+  .populate('fishing')
+  .populate('comments')
+  .then(profile => {
+    res.render('users/show', { 
+      title: "User Page",
+      profile,
+    })
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect('/')
+  })
+}
+
 export {
     index,
     deleteUser as delete,
@@ -159,4 +190,5 @@ export {
     editHabit,
     updateHabit,
     addFriend,
+    show,
 }
