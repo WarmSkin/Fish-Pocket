@@ -3,7 +3,7 @@
 
 <main>
   <% if (user) { %>
-  <section class="fish-data">
+  <section class="data">
     <div class="card" style="width: 18rem;">
       <img src="<%= user.profile.avatar %>" class="card-img-top" alt="<%= user.profile.name %> avatar">
       <div class="card-body">
@@ -15,7 +15,6 @@
           <% if(user.profile.friends?.length) {%>
             <% user.profile.friends.forEach(friend => { %>
                 <button><%= friend.name %></button>
-              </form>
             <% }) %>
           <% } else { %>
             You are alone!
@@ -25,7 +24,6 @@
           <% if(user.profile.fishing?.length) {%>
             <% user.profile.fishing.forEach(fish => { %>
                 <button><%= fish.name %></button>
-              </form>
             <% }) %>
           <% } else { %>
             You caught none!
@@ -35,7 +33,6 @@
           <% if(user.profile.comments?.length) {%>
             <% user.profile.comments.forEach(comment => { %>
                 <button><%= comment.content %></button>
-              </form>
             <% }) %>
           <% } else { %>
             You don't have any comment!

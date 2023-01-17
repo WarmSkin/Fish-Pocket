@@ -58,9 +58,9 @@
         <label for="user-name">Name:</label>
         <input type="text" name="name" id="user-name" value="<%= user.profile.name %>">
         <label for="user-avatar">AvatarURL:</label>
-        <input type="text" name="avatar" id="user-avatar" value="<%= user.profile.avatar %>">
+        <textarea name="avatar" id="user-avatar" cols="30" rows="5"><%= user.profile.avatar %></textarea>
         <label for="user-mood">Mood:</label>
-      <textarea name="mood" id="user-mood" cols="30" rows="10"><%= user.profile.mood %></textarea>
+      <textarea name="mood" id="user-mood" cols="30" rows="5"><%= user.profile.mood %></textarea>
         <button type="submit">Update</button>
       </form>
     </div>

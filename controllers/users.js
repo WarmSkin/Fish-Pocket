@@ -5,7 +5,26 @@ import { Specis } from "../models/specis.js";
 import { Profile } from "../models/profile.js";
 
 function index(req, res) {
-  res.render("users/index", { title: "Users Page" })
+  User.find({})
+  .populate('profile', 'name avatar mood fishing')
+  .then(users => {
+    Profile.find({})
+    .populate('fishing')
+    .then(profiles => {
+      res.render("users/index", { 
+        title: "All Users",
+        users,
+       })
+    })
+    .catch(error => {
+      console.log(error)
+      res.redirect('/')
+    })
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect('/')
+  })
 }
 
 function deleteUser(req, res) {
