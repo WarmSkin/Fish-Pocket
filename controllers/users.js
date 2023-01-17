@@ -195,16 +195,24 @@ function show(req, res) {
 }
 
 function addFish(req, res) {
-  console.log("!!!!", req.body)
+  req.body.owner = req.params.pid
   Profile.findById(req.params.pid)
   .then(profile => {
     Fish.create(req.body)
     .then(fish => {
-      // fish.specis = {req.body.specis}
-      profile.fishing.push(fish._id)
-      profile.save()
-      .then(profile => {
-        res.redirect('/users/mypage')
+      Specis.findById(fish.specis._id)
+      .then(specis => {
+        fish.name = specis.name
+        fish.save()
+        profile.fishing.push(fish._id)
+        profile.save()
+        .then(profile => {
+          res.redirect('/users/mypage')
+        })
+        .catch(error => {
+          console.log(error)
+          res.redirect('/users/mypage')
+        })
       })
       .catch(error => {
         console.log(error)
