@@ -28,12 +28,19 @@
                     <%= comment.from %> says:
                     <%= comment.content %>
                   </p>
-                  <form 
-                    action="users/<%= fishData._id %>/<%= comment._id %>/deleteComment?_method=DELETE "
-                    method="post"
-                  >
-                  <button type="submit"> X </button>
-                  </form>
+                  <!-- Checking if this comment is belong to me, if yes, I could delete it. -->
+                  <% if(myProfile.comments.length) {%>
+                    <% for(let i = 0; i< myProfile.comments.length; i++) { %>
+                      <% if(myProfile.comments[i].equals(comment._id)) {%>
+                        <form 
+                          action="users/<%= fishData._id %>/<%= comment._id %>/deleteComment?_method=DELETE "
+                          method="post"
+                        >
+                        <button type="submit"> X </button>
+                        </form> 
+                      <% break} %> 
+                    <% } %>
+                  <% } %>
               <% }) %>
             <% } %>
           </th>

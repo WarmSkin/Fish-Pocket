@@ -24,6 +24,7 @@
                   <% } %>
                 </li>
               </ul>
+              <!-- Checking if the person is my friend, display 'My Friend' instead of 'Add Friend' -->
               <% if(myProfile.friends.length) {%>
                   <% for(let i = 0; i< myProfile.friends.length; i++) { %>
                     <% if(myProfile.friends[i].equals(otherUser.profile._id)) {%>

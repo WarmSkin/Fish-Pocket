@@ -8,9 +8,17 @@ function index(req, res) {
   .populate('owner')
   .populate('comments')
   .then(fish => {
-    res.render('fish/index', { 
-      title: 'Fish Caught',
-      fish,
+    Profile.findById(req.user.profile._id)
+    .then(myProfile => {
+      res.render('fish/index', { 
+        title: 'Fish Caught',
+        fish,
+        myProfile,
+      })
+    })
+    .catch(error => {
+      console.log(error)
+      res.redirect('/')
     })
   })
   .catch(error => {
