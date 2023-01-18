@@ -283,6 +283,47 @@ function deleteFriend(req, res) {
   })
 }
 
+function deleteComment(req, res) {
+  Fish.findByIdAndUpdate(
+    {_id: req.params.fid},
+    {$pull: { comments: req.params.cid}}
+  )
+  .then( fishData => {
+    Comment.findByIdAndDelete(req.params.cid)
+    .then(comment => {
+      Profile.findByIdAndUpdate(
+        {_id: comment.sender._id},
+        {$pull: { comments: comment._id}}
+      )
+      .then(profileS => {
+        Profile.findByIdAndUpdate(
+          {_id: comment.receiver._id},
+          {$pull: { comments: comment._id}}
+        )
+        .then(profileR => {
+          res.redirect('/fish')
+        })
+        .catch(error => {
+          console.log(error)
+          res.redirect('/fish')
+        })
+      })
+      .catch(error => {
+        console.log(error)
+        res.redirect('/fish')
+      })
+    })
+    .catch(error => {
+      console.log(error)
+      res.redirect('/fish')
+    })
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect('/fish')
+  })
+}
+
 export {
     index,
     deleteUser as delete,
@@ -298,4 +339,5 @@ export {
     addFish,
     addComment,
     deleteFriend,
+    deleteComment,
 }

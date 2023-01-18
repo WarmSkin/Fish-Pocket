@@ -28,6 +28,12 @@
                     <%= comment.from %> says:
                     <%= comment.content %>
                   </p>
+                  <form 
+                    action="users/<%= fishData._id %>/<%= comment._id %>/deleteComment?_method=DELETE "
+                    method="post"
+                  >
+                  <button type="submit"> X </button>
+                  </form>
               <% }) %>
             <% } %>
           </th>
