@@ -269,6 +269,20 @@ function addComment(req, res) {
   })
 }
 
+function deleteFriend(req, res) {
+  Profile.findOneAndUpdate(
+    {_id: req.user.profile._id},
+    {$pull: { friends: req.params.id}}
+    )
+  .then(profile => {
+    res.redirect(`/users/${req.user._id}/edit`)
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect(`/users/${req.user._id}/edit`)
+  })
+}
+
 export {
     index,
     deleteUser as delete,
@@ -283,4 +297,5 @@ export {
     show,
     addFish,
     addComment,
+    deleteFriend,
 }

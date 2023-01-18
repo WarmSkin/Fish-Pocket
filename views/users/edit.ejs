@@ -15,7 +15,8 @@
         <li class="list-group-item">Friends:
           <% if(profile.friends?.length) {%>
             <% profile.friends.forEach(friend => { %>
-                <button><%= friend.name %></button>
+              <form action="/users/<%= friend._id %>/deleteFriend?_method=DELETE" method="POST">
+                <button type="submit"><%= friend.name %></button>
               </form>
             <% }) %>
           <% } else { %>
