@@ -10,6 +10,9 @@
       <th>Fish Name</th>
       <th>Avatar</th>
       <th>Date</th>
+      <th>Comments</th>
+      <th></th>
+      <th></th>
     </tr>
     <% fish.forEach(fishData => { %>
         <tr>
@@ -18,6 +21,20 @@
           <th><%= fishData.name %></th>
           <th><img src="<%= fishData.species.avatar %>" alt="" style="height:100px;"></th>
           <th>at <%= fishData.caughtDate.toISOString().slice(0, 10) %></th>
+          <th>
+            <% if(fishData.comments?.length) {%>
+              <% fishData.comments.forEach(comment => { %>
+                  <p>
+                    <%= comment.from %> says:
+                    <%= comment.content %>
+                  </p>
+              <% }) %>
+            <% } %>
+          </th>
+          <form action="/fish/<%= fishData._id %>/addComment" method="POST">
+            <th><textarea name="content" id="" cols="30" rows="1"></textarea></th>
+            <th><button type="submit">Add Comment</button></th>
+          </form>
         </tr>
     <% }) %> 
   </table>

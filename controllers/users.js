@@ -234,7 +234,9 @@ function addComment(req, res) {
     Profile.findById(req.user.profile._id)
     .then(profile2 => {
       req.body.from = profile2.name
+      req.body.sender = profile2._id
       req.body.to = profile1.name
+      req.body.receiver = profile1._id
       Comment.create(req.body)
       .then(comment => {
         profile1.comments.push(comment._id)
