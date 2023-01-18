@@ -24,14 +24,34 @@
                   <% } %>
                 </li>
               </ul>
-              <div class="card-body">
-                <form 
-                  action="/users/<%= otherUser.profile._id %>/addFriend" 
-                  method="POST"
-                >
-                  <button>Add Friend</button>
-                </form>
-              </div>
+              <% if(myProfile.friends.length) {%>
+                  <% for(let i = 0; i< myProfile.friends.length; i++) { %>
+                    <% if(myProfile.friends[i].equals(otherUser.profile._id)) {%>
+                      <div class="card-body">
+                        <button>My Friend</button>
+                      </div> 
+                    <% break} %>
+                    <% if(i === (myProfile.friends.length -1)) {%>
+                      <div class="card-body">
+                        <form 
+                          action="/users/<%= otherUser.profile._id %>/addFriend" 
+                          method="POST"
+                        >
+                          <button>Add Friend</button>
+                        </form>
+                      </div>
+                    <% } %>  
+                  <% } %>
+                <% } else { %>
+                    <div class="card-body">
+                      <form 
+                        action="/users/<%= otherUser.profile._id %>/addFriend" 
+                        method="POST"
+                      >
+                        <button>Add Friend</button>
+                      </form>
+                    </div>
+                <% } %>  
               <div>
                 <form 
                   action="/users/<%= otherUser.profile._id %>/sendMessage" 

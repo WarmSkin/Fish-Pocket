@@ -12,10 +12,18 @@ function index(req, res) {
     populate: {path: 'fishing'}, 
   })
   .then(users => {
-    res.render("users/index", { 
-      title: "All Users",
-      users,
+    Profile.findById(req.user.profile._id)
+    .then(myProfile => {
+      res.render("users/index", { 
+        title: "All Users",
+        users,
+        myProfile,
       })
+    })
+    .catch(error => {
+      console.log(error)
+      res.redirect('/')
+    })
   })
   .catch(error => {
     console.log(error)
