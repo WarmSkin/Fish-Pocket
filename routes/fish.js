@@ -7,6 +7,7 @@ const router = Router()
 router.get('/', isLoggedIn, fishCtrl.index)
 router.delete('/:id', fishCtrl.delete)
 router.post('/:id/addComment', fishCtrl.addComment)
+router.delete('/:fid/:cid/deleteComment', isLoggedIn, fishCtrl.deleteComment)
 
 export {
   router

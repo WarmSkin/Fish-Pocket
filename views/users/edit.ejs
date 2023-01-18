@@ -4,11 +4,10 @@
 <main>
   <h1>Update Information</h1>
   <section class="data">
-    <div class="card" style="width: 18rem;">
+    <div class="card" style="width: 20rem;">
       <img src="<%= profile.avatar %>" class="card-img-top" alt="<%= profile.name %> avatar">
       <div class="card-body">
         <h5 class="card-title"><%= profile.name %></h5>
-        <% console.dir(profile) %> 
         <p class="card-text">Mood:<%= profile.mood %></p>
       </div>
       <ul class="list-group list-group-flush">
@@ -37,7 +36,14 @@
         <li class="list-group-item">Comments: 
           <% if(profile.comments?.length) {%>
             <% profile.comments.forEach(comment => { %>
-                <button><%= comment.content %></button>
+              <form action="/users/<%= friend._id %>/deleteFriend?_method=DELETE" method="POST">
+                <button type="submit">
+                  <p>
+                    <%= comment.from %> says: 
+                    <%= comment.content %> 
+                    to <%= comment.to %>
+                  </p>
+                </button>
               </form>
             <% }) %>
           <% } else { %>

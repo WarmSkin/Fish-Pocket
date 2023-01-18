@@ -33,7 +33,7 @@
                     <% for(let i = 0; i< myProfile.comments.length; i++) { %>
                       <% if(myProfile.comments[i].equals(comment._id)) {%>
                         <form 
-                          action="users/<%= fishData._id %>/<%= comment._id %>/deleteComment?_method=DELETE "
+                          action="fish/<%= fishData._id %>/<%= comment._id %>/deleteComment?_method=DELETE "
                           method="post"
                         >
                         <button type="submit"> X </button>

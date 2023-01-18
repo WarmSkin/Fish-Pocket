@@ -2,82 +2,78 @@
 <%- include('../partials/nav') %>
 
 <main>
-  <section class="data">
-    <div>
-      <% if (user) { %>
-        <section class="data">
-          <div class="card" style="width: 18rem;">
-            <img src="<%= profile.avatar %>" class="card-img-top" alt="<%= profile.name %> avatar">
-            <div class="card-body">
-              <h5 class="card-title"><%= profile.name %></h5>
-              <p class="card-text">Mood:<%= profile.mood %></p>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">Friends:
-                <% if(profile.friends?.length) {%>
-                  <% profile.friends.forEach(friend => { %>
-                      <button><%= friend.name %></button>
-                  <% }) %>
-                <% } else { %>
-                  You are alone!
-                <% } %> 
-              </li>
-              <li class="list-group-item">Fishing: 
-                <% if(profile.fishing?.length) {%>
-                  <% profile.fishing.forEach(fish => { %>
-                      <button><%= fish.name %></button>
-                  <% }) %>
-                <% } else { %>
-                  You caught none!
-                <% } %>
-              </li>
-              <li class="list-group-item">Comments: 
-                <% if(profile.comments?.length) {%>
-                  <% profile.comments.forEach(comment => { %>
-                      <p>
-                        <%= comment.from %> says:
-                        <%= comment.content %>
-                        to <%= comment.to %>
-                      </p>
-                  <% }) %>
-                <% } else { %>
-                  You don't have any comment!
-                <% } %>
-              </li>
-            </ul>
-            <div class="card-body">
-              <a href="/users/<%= user._id %>/edit"><button>Edit</button></a>
-              <form 
-                action="/users/<%= user._id %>/u?_method=DELETE" 
-                method="POST"
-              >
-                <button>Delete</button>
-              </form>
-            </div>
-          </div>
-        </section>
-      <% } %>
-    </div>
-    <div>
-      <form action="/users/<%= profile._id %>/fishing" method="POST" id="edit-form">
-        <h1>Caught A Fish</h1>
-        <select name="species">
-        <% species.forEach(fishData => { %>
-            <option value="<%= fishData._id %>">
-              <%= fishData.name %>
-            </option>
-            <% }) %>
-        </select>
-        <!-- <label for="fish-name">Name:</label>
-        <input type="text" name="name" id="fish-name"> -->
-        <label for="fish-length">Length(inches):</label>
-        <input type="number" name="length" id="fish-length" min="0">
-        <label for="fish-caughtD">Caught:</label>
-        <input type="date" name="caughtDate" id="fish-caughtD" value="<%= caughtDate %>">
-        <button type="submit">Add Fish</button>
-      </form>
-    </div>
-  </section>
+  <% if (user) { %>
+    <section class="data">
+      <div class="card" style="width: 20rem;">
+        <img src="<%= profile.avatar %>" class="card-img-top" alt="<%= profile.name %> avatar">
+        <div class="card-body">
+          <h5 class="card-title"><%= profile.name %></h5>
+          <p class="card-text">Mood:<%= profile.mood %></p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Friends:
+            <% if(profile.friends?.length) {%>
+              <% profile.friends.forEach(friend => { %>
+                  <button type="submit"><%= friend.name %></button>
+              <% }) %>
+            <% } else { %>
+              You are alone!
+            <% } %> 
+          </li>
+          <li class="list-group-item">Fishing: 
+            <% if(profile.fishing?.length) {%>
+              <% profile.fishing.forEach(fish => { %>
+                  <button type="submit"><%= fish.name %></button>
+              <% }) %>
+            <% } else { %>
+              You caught none!
+            <% } %>
+          </li>
+          <li class="list-group-item">Comments: 
+            <% if(profile.comments?.length) {%>
+              <% profile.comments.forEach(comment => { %>
+                <button>
+                  <p>
+                    <%= comment.from %> says: 
+                    <%= comment.content %> 
+                    to <%= comment.to %>
+                  </p>
+                </button>  
+              <% }) %>
+            <% } else { %>
+              You don't have any comment!
+            <% } %>
+          </li>
+        </ul>
+        <div class="card-body">
+          <a href="/users/<%= user._id %>/edit"><button>Edit</button></a>
+          <form 
+            action="/users/<%= user._id %>/u?_method=DELETE" 
+            method="POST"
+          >
+            <button>Delete</button>
+          </form>
+        </div>
+      </div>
+      <div>
+        <form action="/users/<%= profile._id %>/fishing" method="POST" id="edit-form">
+          <h1>Caught A Fish</h1>
+          <select name="species">
+            <% species.forEach(fishData => { %>
+              <option value="<%= fishData._id %>">
+                <%= fishData.name %>
+              </option>
+              <% }) %>
+            </select>
+            <label for="fish-length">Length(inches):</label>
+            <input type="number" name="length" id="fish-length" min="0">
+            <label for="fish-caughtD">Caught:</label>
+            <input type="date" name="caughtDate" id="fish-caughtD" value="<%= caughtDate %>">
+            <button type="submit">Add Fish</button>
+        </form>
+      </div>
+    </section>
+  <% } %>
 </main>
 
 <%- include('../partials/footer') %>
