@@ -164,6 +164,9 @@ function addFriend(req, res) {
 }
 
 function show(req, res) {
+  const newFish = new Fish();
+  const caughtDate = newFish.caughtDate;
+
   Profile.findById(req.user.profile._id)
   .populate('friends')
   .populate('fishing')
@@ -173,6 +176,7 @@ function show(req, res) {
     .then(species => {
       res.render('users/show', { 
         title: "User Page",
+        caughtDate: caughtDate.toISOString().slice(0, 10),
         profile,
         species,
       })
