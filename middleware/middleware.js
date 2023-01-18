@@ -9,7 +9,13 @@ function isLoggedIn(req, res, next) {
   res.redirect('/')
 }
 
+function isManager(req, res, next) {
+  if( res.locals.user?.profile.level >= 900) return next()
+  res.redirect('/')
+}
+
 export {
   passDataToView,
   isLoggedIn,
+  isManager,
 }
