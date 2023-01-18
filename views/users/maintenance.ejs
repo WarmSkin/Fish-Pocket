@@ -4,8 +4,8 @@
 <main>
   <h1><%= title %></h1>
   <section class="data">
-    <% if(specis.length) {%>
-      <% specis.forEach(fishData => { %>
+    <% if(species.length) {%>
+      <% species.forEach(fishData => { %>
         <div class="card" style="width: 18rem;">
           <img src="<%= fishData.avatar %>" class="card-img-top" alt="...">
           <div class="card-body">
@@ -26,9 +26,9 @@
             <li class="list-group-item">End: <%= fishData.seasonEndDate.toJSON().slice(0, 10) %></li>
           </ul>
           <div class="card-body">
-            <a href="/specis/<%= fishData._id %>/edit"><button>Edit</button></a>
+            <a href="/species/<%= fishData._id %>/edit"><button>Edit</button></a>
             <form 
-              action="/specis/<%= fishData._id %>?_method=DELETE" 
+              action="/species/<%= fishData._id %>?_method=DELETE" 
               method="POST"
             >
               <button>Delete</button>
@@ -37,19 +37,19 @@
         </div>
       <% }) %>
     <% } %>
-    <form action="/specis/new" method="POST" id="edit-form">
-      <label for="specis-name">Name:</label>
-      <input type="text" name="name" id="specis-name">
-      <label for="specis-avatar">AvatarURL:</label>
-      <textarea name="avatar" id="specis-avatar" cols="30" rows="5"></textarea>
-      <label for="specis-keeper">Keeper Length:</label>
-      <input type="text" name="keeperLength" id="specis-keeper">
-      <label for="specis-seasonS">Season Start:</label>
-      <input type="date" name="seasonStartDate" id="specis-seasonS">
-      <label for="specis-seasonE">Season End:</label>
-      <input type="date" name="seasonEndDate" id="specis-seasonE">
-      <label for="specis-content">Content:</label>
-      <textarea name="content" id="specis-content" cols="30" rows="10"></textarea>
+    <form action="/species/new" method="POST" id="edit-form">
+      <label for="species-name">Name:</label>
+      <input type="text" name="name" id="species-name">
+      <label for="species-avatar">AvatarURL:</label>
+      <textarea name="avatar" id="species-avatar" cols="30" rows="5"></textarea>
+      <label for="species-keeper">Keeper Length:</label>
+      <input type="text" name="keeperLength" id="species-keeper">
+      <label for="species-seasonS">Season Start:</label>
+      <input type="date" name="seasonStartDate" id="species-seasonS">
+      <label for="species-seasonE">Season End:</label>
+      <input type="date" name="seasonEndDate" id="species-seasonE">
+      <label for="species-content">Content:</label>
+      <textarea name="content" id="species-content" cols="30" rows="10"></textarea>
       <button type="submit">Add Data</button>
     </form>
   </section>

@@ -1,27 +1,21 @@
 import { User } from "../models/user.js";
 import { Habit } from "../models/habit.js";
 import { Fish } from "../models/fish.js";
-import { Specis } from "../models/specis.js";
+import { Species } from "../models/species.js";
 import { Profile } from "../models/profile.js";
 import { Comment } from "../models/comment.js";
 
 function index(req, res) {
   User.find({_id: {$nin: req.user._id}})
-  .populate('profile', 'name avatar mood fishing')
+  .populate({
+    path: 'profile',
+    populate: {path: 'fishing'}, 
+  })
   .then(users => {
-    Profile.find({})
-    .populate('fishing')
-    .then(profiles => {
-      res.render("users/index", { 
-        title: "All Users",
-        myProfile: req.user.profile,
-        users,
-       })
-    })
-    .catch(error => {
-      console.log(error)
-      res.redirect('/')
-    })
+    res.render("users/index", { 
+      title: "All Users",
+      users,
+      })
   })
   .catch(error => {
     console.log(error)
@@ -84,14 +78,14 @@ function updateUser(req, res) {
 }
 
 function maintenance(req, res) {
-  Specis.find({})
+  Species.find({})
   .populate('habits')
-  .then(specis => {
+  .then(species => {
     Habit.find({})
     .then(habits => {
       res.render("users/maintenance", { 
         title: "Maintenance",
-        specis,
+        species,
         habits,
       })
     })
@@ -120,9 +114,9 @@ function createHabit(req, res) {
 function deleteHabit(req, res) {
   Habit.findByIdAndDelete(req.params.id)
   .then(habit => {
-    Specis.find({})
-    .then(specis => {
-      specis.forEach(fishData => {
+    Species.find({})
+    .then(species => {
+      species.forEach(fishData => {
         if(fishData.habits)
           fishData.habits.remove({_id: req.params.id})
       })
@@ -175,12 +169,12 @@ function show(req, res) {
   .populate('fishing')
   .populate('comments')
   .then(profile => {
-    Specis.find({})
-    .then(specis => {
+    Species.find({})
+    .then(species => {
       res.render('users/show', { 
         title: "User Page",
         profile,
-        specis,
+        species,
       })
     })
     .catch(error => {
@@ -200,9 +194,9 @@ function addFish(req, res) {
   .then(profile => {
     Fish.create(req.body)
     .then(fish => {
-      Specis.findById(fish.specis._id)
-      .then(specis => {
-        fish.name = specis.name
+      Species.findById(fish.species._id)
+      .then(species => {
+        fish.name = species.name
         fish.save()
         profile.fishing.push(fish._id)
         profile.save()

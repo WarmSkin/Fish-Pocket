@@ -1,13 +1,13 @@
-import { Specis } from "../models/specis.js";
+import { Species } from "../models/species.js";
 import { Habit } from "../models/habit.js";
 
 function index(req, res) {
-  Specis.find({})
+  Species.find({})
   .populate('habits')
-  .then(specis => {
-    res.render('specis/index', { 
+  .then(species => {
+    res.render('species/index', { 
       title: "FishData Page",
-      specis,
+      species,
     })
   })
   .catch(error => {
@@ -16,39 +16,39 @@ function index(req, res) {
   })
 }
 
-function newSpecis(req, res) {
+function newSpecies(req, res) {
   for (const key in req.body) {
     if(req.body[key] === "") delete req.body[key]
   }
 
-  Specis.create(req.body)
-  .then(specis => {
-    res.redirect('/specis')
+  Species.create(req.body)
+  .then(species => {
+    res.redirect('/species')
   })
   .catch(error => {
     console.log(error),
-    res.redirect('/specis')
+    res.redirect('/species')
   })
 }
 
-function deleteSpecis(req, res) {
-  Specis.findByIdAndDelete(req.params.id)
-  .then(specis => {
-    res.redirect('/specis')
+function deleteSpecies(req, res) {
+  Species.findByIdAndDelete(req.params.id)
+  .then(species => {
+    res.redirect('/species')
   })
   .catch(error => {
     console.log(error)
-    res.redirect('/specis')
+    res.redirect('/species')
   })
 }
 
 function edit(req, res) {
-  Specis.findById(req.params.id)
+  Species.findById(req.params.id)
   .populate('habits')
   .then(fishData => {
     Habit.find({_id: {$nin: fishData.habits}})
     .then(habits => {
-      res.render('specis/edit', {
+      res.render('species/edit', {
         title: "Fish Data",
         fishData,
         habits,
@@ -70,58 +70,58 @@ function update(req, res) {
     if(req.body[key] === "") delete req.body[key]
   }
 
-  Specis.findByIdAndUpdate(req.params.id, req.body)
+  Species.findByIdAndUpdate(req.params.id, req.body)
   .then(fishData => {
-    res.redirect(`/specis/${fishData._id}/edit`)
+    res.redirect(`/species/${fishData._id}/edit`)
   })
   .catch(error => {
     console.log(error)
-    res.redirect(`/specis/${fishData._id}/edit`)
+    res.redirect(`/species/${fishData._id}/edit`)
   })
 }
 
 function addHabit(req, res) {
-  Specis.findById(req.params.id)
+  Species.findById(req.params.id)
   .then(fishData => {
     fishData.habits.push(req.params.hid)
     fishData.save()
     .then(fishData => {
-      res.redirect(`/specis/${fishData._id}/edit`)
+      res.redirect(`/species/${fishData._id}/edit`)
     })
     .catch(error => {
       console.log(error)
-      res.redirect(`/specis/${fishData._id}/edit`)
+      res.redirect(`/species/${fishData._id}/edit`)
     })
   })
   .catch(error => {
     console.log(error)
-    res.redirect(`/specis/${fishData._id}/edit`)
+    res.redirect(`/species/${fishData._id}/edit`)
   })
 }
 
 function deleteHabit(req, res) {
-  Specis.findById(req.params.id)
+  Species.findById(req.params.id)
   .then(fishData => {
     fishData.habits.remove(req.params.hid)
     fishData.save()
     .then(fishData => {
-      res.redirect(`/specis/${fishData._id}/edit`)
+      res.redirect(`/species/${fishData._id}/edit`)
     })
     .catch(error => {
       console.log(error)
-      res.redirect(`/specis/${fishData._id}/edit`)
+      res.redirect(`/species/${fishData._id}/edit`)
     })
   })
   .catch(error => {
     console.log(error)
-    res.redirect(`/specis/${fishData._id}/edit`)
+    res.redirect(`/species/${fishData._id}/edit`)
   })
 }
 
 export {
     index,
-    newSpecis as new,
-    deleteSpecis as delete,
+    newSpecies as new,
+    deleteSpecies as delete,
     edit,
     update,
     addHabit,

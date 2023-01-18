@@ -8,7 +8,7 @@
     <div>
       <% if(habits.length) {%>
         <% habits.forEach(habit => { %>
-          <form action="/specis/<%= fishData._id %>/<%= habit._id %>" method="POST">
+          <form action="/species/<%= fishData._id %>/<%= habit._id %>" method="POST">
             <button type="submit"><%= habit.name %></button>
           </form>
         <% }) %>
@@ -25,7 +25,7 @@
         <li class="list-group-item">
           <% if(fishData.habits.length) {%>
             <% fishData.habits.forEach(habit => { %>
-              <form action="/specis/<%= fishData._id %>/<%= habit._id %>?_method=DELETE" method="POST">
+              <form action="/species/<%= fishData._id %>/<%= habit._id %>?_method=DELETE" method="POST">
                 <button type="submit"><%= habit.name %></button>
               </form>
             <% }) %>
@@ -36,9 +36,9 @@
         <li class="list-group-item">End: <%= fishData.seasonEndDate.toJSON().slice(0, 10) %></li>
       </ul>
       <div class="card-body">
-        <a href="/specis/"><button>Go Back</button></a>
+        <a href="/species/"><button>Go Back</button></a>
         <form 
-          action="/specis/<%= fishData._id %>?_method=DELETE" 
+          action="/species/<%= fishData._id %>?_method=DELETE" 
           method="POST"
         >
           <button>Delete</button>
@@ -46,19 +46,19 @@
       </div>
     </div>
     <div>
-      <form action="/specis/<%= fishData._id %>/?_method=PUT" method="POST" id="edit-form">
-        <label for="specis-name">Name:</label>
-        <input type="text" name="name" id="specis-name" value="<%= fishData.name %>">
-        <label for="specis-avatar">AvatarURL:</label>
-        <textarea name="avatar" id="specis-avatar" cols="30" rows="5"><%= fishData.avatar %></textarea>
-        <label for="specis-keeper">Keeper Length:</label>
-        <input type="text" name="keeperLength" id="specis-keeper" value="<%= fishData.keeperLength %>">
-        <label for="specis-seasonS">Season Start:</label>
-        <input type="date" name="seasonStartDate" id="specis-seasonS" value="<%= fishData.seasonStartDate.toJSON().slice(0, 10) %>">
-        <label for="specis-seasonE">Season End:</label>
-        <input type="date" name="seasonEndDate" id="specis-seasonE" value="<%= fishData.seasonEndDate.toJSON().slice(0, 10) %>">
-        <label for="specis-content">Content:</label>
-      <textarea name="content" id="specis-content" cols="30" rows="10"><%= fishData.content %></textarea>
+      <form action="/species/<%= fishData._id %>/?_method=PUT" method="POST" id="edit-form">
+        <label for="species-name">Name:</label>
+        <input type="text" name="name" id="species-name" value="<%= fishData.name %>">
+        <label for="species-avatar">AvatarURL:</label>
+        <textarea name="avatar" id="species-avatar" cols="30" rows="5"><%= fishData.avatar %></textarea>
+        <label for="species-keeper">Keeper Length:</label>
+        <input type="text" name="keeperLength" id="species-keeper" value="<%= fishData.keeperLength %>">
+        <label for="species-seasonS">Season Start:</label>
+        <input type="date" name="seasonStartDate" id="species-seasonS" value="<%= fishData.seasonStartDate.toJSON().slice(0, 10) %>">
+        <label for="species-seasonE">Season End:</label>
+        <input type="date" name="seasonEndDate" id="species-seasonE" value="<%= fishData.seasonEndDate.toJSON().slice(0, 10) %>">
+        <label for="species-content">Content:</label>
+      <textarea name="content" id="species-content" cols="30" rows="10"><%= fishData.content %></textarea>
         <button type="submit">Update</button>
       </form>
     </div>

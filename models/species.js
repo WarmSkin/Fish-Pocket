@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 const Schema = mongoose.Schema
 
-const SpecisSchema = new Schema({
+const SpeciesSchema = new Schema({
   name: String,
   content: String,
   avatar: String,
@@ -13,8 +13,8 @@ const SpecisSchema = new Schema({
 }, {
   timestamps: true
 })
-const Specis = mongoose.model('Specis', SpecisSchema)
+const Species = mongoose.model('Species', SpeciesSchema)
 
 export {
-  Specis
+  Species
 }

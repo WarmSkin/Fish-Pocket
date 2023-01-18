@@ -3,7 +3,24 @@
 
 <main>
   <h1><%= title %></h1>
-  
+  <table>
+    <tr>
+      <th>Owner</th>
+      <th>Length</th>
+      <th>Fish Name</th>
+      <th>Avatar</th>
+      <th>Date</th>
+    </tr>
+    <% fish.forEach(fishData => { %>
+        <tr>
+          <th><%= fishData.owner.name %> caught</th>
+          <th><%= fishData.length %>"</th>
+          <th><%= fishData.name %></th>
+          <th><img src="<%= fishData.species.avatar %>" alt="" style="height:100px;"></th>
+          <th>at <%= fishData.caughtDate.toISOString().slice(0, 10) %></th>
+        </tr>
+    <% }) %> 
+  </table>
 </main>
 
 <%- include('../partials/footer') %>

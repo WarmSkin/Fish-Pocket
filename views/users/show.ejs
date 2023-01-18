@@ -55,22 +55,22 @@
       <% } %>
     </div>
     <div>
-      <h1>Caught A Fish</h1>
-      <form action="/users/<%= profile._id %>/fishing" method="POST">
-          <select name="specis">
-          <% specis.forEach(fishData => { %>
-              <option value="<%= fishData._id %>">
-                <%= fishData.name %>
-              </option>
-              <% }) %>
-          </select>
-          <!-- <label for="fish-name">Name:</label>
-          <input type="text" name="name" id="fish-name"> -->
-          <label for="fish-length">Length(inches):</label>
-          <input type="number" name="length" id="fish-length" min="0">
-          <label for="fish-caughtD">Caught:</label>
-          <input type="date" name="caughtDate" id="fish-caughtD">
-          <button type="submit">Add Fish</button>
+      <form action="/users/<%= profile._id %>/fishing" method="POST" id="edit-form">
+        <h1>Caught A Fish</h1>
+        <select name="species">
+        <% species.forEach(fishData => { %>
+            <option value="<%= fishData._id %>">
+              <%= fishData.name %>
+            </option>
+            <% }) %>
+        </select>
+        <!-- <label for="fish-name">Name:</label>
+        <input type="text" name="name" id="fish-name"> -->
+        <label for="fish-length">Length(inches):</label>
+        <input type="number" name="length" id="fish-length" min="0">
+        <label for="fish-caughtD">Caught:</label>
+        <input type="date" name="caughtDate" id="fish-caughtD">
+        <button type="submit">Add Fish</button>
       </form>
     </div>
   </section>

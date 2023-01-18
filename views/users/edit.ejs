@@ -25,7 +25,8 @@
         <li class="list-group-item">Fishing: 
           <% if(profile.fishing?.length) {%>
             <% profile.fishing.forEach(fish => { %>
-                <button><%= fish.name %></button>
+              <form action="/fish/<%= fish._id %>?_method=DELETE" method="POST">
+                <button type="submit"><%= fish.name %></button>
               </form>
             <% }) %>
           <% } else { %>
