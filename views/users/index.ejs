@@ -32,6 +32,15 @@
                   <button>Add Friend</button>
                 </form>
               </div>
+              <div>
+                <form 
+                  action="/users/<%= otherUser.profile._id %>/sendMessage" 
+                  method="POST"
+                >
+                  <textarea name="content" id="" cols="30" rows="2"></textarea>
+                  <button type="submit">Send Message</button>
+                </form>
+              </div>
             </div>
           </section> 
       <% }) %>

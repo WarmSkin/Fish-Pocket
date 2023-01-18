@@ -34,7 +34,11 @@
               <li class="list-group-item">Comments: 
                 <% if(profile.comments?.length) {%>
                   <% profile.comments.forEach(comment => { %>
-                      <button><%= comment.content %></button>
+                      <p>
+                        <%= comment.from %> says:
+                        <%= comment.content %>
+                        to <%= comment.to %>
+                      </p>
                   <% }) %>
                 <% } else { %>
                   You don't have any comment!

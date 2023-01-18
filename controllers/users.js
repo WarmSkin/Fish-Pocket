@@ -228,6 +228,37 @@ function addFish(req, res) {
   })
 }
 
+function addComment(req, res) {
+  Profile.findById(req.params.id)
+  .then(profile1 => {
+    Profile.findById(req.user.profile._id)
+    .then(profile2 => {
+      req.body.from = profile2.name
+      req.body.to = profile1.name
+      Comment.create(req.body)
+      .then(comment => {
+        profile1.comments.push(comment._id)
+        profile1.save()
+        profile2.comments.push(comment._id)
+        profile2.save()
+        res.redirect('/users')
+      })
+      .catch(error => {
+        console.log(error)
+        res.redirect('/users')
+      })
+    })
+    .catch(error => {
+      console.log(error)
+      res.redirect('/users')
+    })
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect('/users')
+  })
+}
+
 export {
     index,
     deleteUser as delete,
@@ -241,4 +272,5 @@ export {
     addFriend,
     show,
     addFish,
+    addComment,
 }

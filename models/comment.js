@@ -4,7 +4,9 @@ const Schema = mongoose.Schema
 
 const CommentSchema = new Schema({
   content: String,
-  owner: [{type: Schema.Types.ObjectId, ref: "Profile"}]
+  from: String,
+  to: String,
+
 }, {
   timestamps: true
 })
