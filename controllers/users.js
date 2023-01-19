@@ -161,7 +161,7 @@ function updateHabit(req, res) {
 function addFriend(req, res) {
   Profile.findById(req.user.profile.id)
   .then(profile => {
-    profile.friends.push(req.params.pId)
+    profile.friends.push(req.params.pid)
     profile.save()
     res.redirect('/users')
   })
@@ -298,6 +298,20 @@ function showFriend(req, res) {
   })
 }
 
+function deleteMessage(req, res) {
+  Profile.findByIdAndUpdate(
+    {_id: req.user.profile._id},
+    {$pull: { comments: req.params.mid}}
+  )
+  .then(profile => {
+    res.redirect(`/users/${req.user._id}/edit`)
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect(`/users/${req.user._id}/edit`)
+  })
+}
+
 export {
     index,
     deleteUser as delete,
@@ -314,4 +328,5 @@ export {
     addComment,
     deleteFriend,
     showFriend,
+    deleteMessage,
 }

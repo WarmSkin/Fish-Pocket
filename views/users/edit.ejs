@@ -37,7 +37,7 @@
           <% if(profile.comments?.length) {%>
             <% profile.comments.forEach(comment => { %>
               <% if(comment.from !== profile.name) { %>
-                <form action="/users/<%= comment._id %>/deleteComment?_method=DELETE" method="POST">
+                <form action="/users/<%= comment._id %>/deleteMessage?_method=DELETE" method="POST">
                   <button type="submit">
                     <p>
                       <%= comment.from %>: 
