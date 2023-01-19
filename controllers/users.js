@@ -36,6 +36,7 @@ function deleteUser(req, res) {
   .then(user => {
     Profile.findByIdAndDelete(user.profile._id)
     .then(profile => {
+
         res.redirect('/')
       })
     .catch(error => {
@@ -201,9 +202,10 @@ function show(req, res) {
 }
 
 function addFish(req, res) {
-  req.body.owner = req.params.pid
   Profile.findById(req.params.pid)
   .then(profile => {
+    req.body.owner = req.params.pid
+    req.body.ownerName = profile.name
     Fish.create(req.body)
     .then(fish => {
       Species.findById(fish.species._id)

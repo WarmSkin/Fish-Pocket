@@ -5,7 +5,6 @@ import { Comment } from "../models/comment.js"
 function index(req, res) {
   Fish.find({})
   .populate('species')
-  .populate('owner')
   .populate('comments')
   .then(fish => {
     Profile.findById(req.user.profile._id)

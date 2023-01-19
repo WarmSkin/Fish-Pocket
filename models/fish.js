@@ -5,6 +5,7 @@ const Schema = mongoose.Schema
 const FishSchema = new Schema({
   name: String,
   length: Number,
+  ownerName: String,
   caughtDate: {type: Date,
     default: new Date()},
   species:  {type: Schema.Types.ObjectId, ref: "Species"},
