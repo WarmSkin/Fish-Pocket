@@ -3,39 +3,51 @@
 
 <main>
   <section class="data">
-    <section >
-      <div class="card" style="width: 18rem;">
-        <img src="<%= friend.avatar %>" class="card-img-top" alt="<%= friend.name %> avatar">
-        <div class="card-body">
-          <h5 class="card-title"><%= friend.name %></h5>
-          <p class="card-text">Mood:<%= friend.mood %></p>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">Fishing: 
-            <% if(friend.fishing?.length) {%>
-              <% friend.fishing.forEach(fish => { %>
-                <a href="/users/<%= fish._id %>/afish">
-                  <button type="submit">
-                    <%= fish.length %>" <%= fish.name %> on <%= fish.caughtDate.toISOString().slice(0, 10) %>
-                  </button>
-                </a>
-              <% }) %>
-            <% } else { %>
-              You caught none!
-            <% } %>
-          </li>
-        </ul>
-        <div>
-          <form 
-            action="/users/<%= friend._id %>/sendMessage" 
-            method="POST"
-          >
-            <textarea name="content" id="" cols="30" rows="2"></textarea>
-            <button type="submit">Send Message</button>
-          </form>
-        </div>
+    <div class="card" style="width: 18rem;">
+      <img src="<%= friend.avatar %>" class="card-img-top" alt="<%= friend.name %> avatar">
+      <div class="card-body">
+        <h5 class="card-title"><%= friend.name %></h5>
+        <p class="card-text">Mood:<%= friend.mood %></p>
       </div>
-    </section> 
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Fishing: 
+          <% if(friend.fishing?.length) {%>
+            <% friend.fishing.forEach(fish => { %>
+              <a href="/users/<%= fish._id %>/afish">
+                <button type="submit">
+                  <%= fish.length %>" <%= fish.name %> on <%= fish.caughtDate.toISOString().slice(0, 10) %>
+                </button>
+              </a>
+            <% }) %>
+          <% } else { %>
+            You caught none!
+          <% } %>
+        </li>
+      </ul>
+      <div>
+        <form 
+          action="/users/<%= friend._id %>/sendMessageF" 
+          method="POST"
+        >
+          <textarea name="content" id="" cols="30" rows="2"></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+    </div>
+    <div>
+      <% if(myProfile.comments?.length) {%>
+        <% myProfile.comments.forEach(comment => { %>
+          <% if(comment.to === friend.name || comment.to === myProfile.name) { %>
+            <div>
+              <button type="submit">
+                  <%= myProfile.name === comment.from ? "You" : comment.from %>: 
+                  <%= comment.content %> 
+              </button>
+            </div>
+          <% } %>  
+        <% }) %>
+      <% } %> 
+    </div>
   </section>
 </main>
 

@@ -236,7 +236,7 @@ function addFish(req, res) {
   })
 }
 
-function addMessage(req, res) {
+function sendMessage(req, res) {
   Profile.findById(req.params.id)
   .then(profile1 => {
     Profile.findById(req.user.profile._id)
@@ -269,6 +269,39 @@ function addMessage(req, res) {
   })
 }
 
+function sendMessageF(req, res) {
+  Profile.findById(req.params.id)
+  .then(profile1 => {
+    Profile.findById(req.user.profile._id)
+    .then(profile2 => {
+      req.body.from = profile2.name
+      req.body.sender = profile2._id
+      req.body.to = profile1.name
+      req.body.receiver = profile1._id
+      Comment.create(req.body)
+      .then(comment => {
+        profile1.comments.push(comment._id)
+        profile1.save()
+        profile2.comments.push(comment._id)
+        profile2.save()
+        res.redirect(`/users/${friend._id}/friend`)
+      })
+      .catch(error => {
+        console.log(error)
+        res.redirect(`/users/${friend._id}/friend`)
+      })
+    })
+    .catch(error => {
+      console.log(error)
+      res.redirect(`/users/${friend._id}/friend`)
+    })
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect(`/users/${friend._id}/friend`)
+  })
+}
+
 function deleteFriend(req, res) {
   Profile.findOneAndUpdate(
     {_id: req.user.profile._id},
@@ -287,9 +320,19 @@ function showFriend(req, res) {
   Profile.findById(req.params.fid)
   .populate('fishing')
   .then(friend => {
-    res.render('users/myFriend', {
-      title: `${friend.name}`,
-      friend,
+    Profile.findById(req.user.profile._id)
+    .populate('comments')
+    .then(myProfile => {
+      console.log("!!!!!",myProfile)
+      res.render('users/myFriend', {
+        title: `${friend.name}`,
+        myProfile,
+        friend,
+      })
+    })
+    .catch(error => {
+      console.log(error)
+      res.redirect('/users/mypage')
     })
   })
   .catch(error => {
@@ -427,7 +470,8 @@ export {
     addFriend,
     show,
     addFish,
-    addMessage,
+    sendMessage,
+    sendMessageF,
     deleteFriend,
     showFriend,
     showFish,
