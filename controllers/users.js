@@ -283,6 +283,21 @@ function deleteFriend(req, res) {
   })
 }
 
+function showFriend(req, res) {
+  Profile.findById(req.params.fid)
+  .populate('fishing')
+  .then(friend => {
+    res.render('users/myFriend', {
+      title: `${friend.name}`,
+      friend,
+    })
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect('/users/mypage')
+  })
+}
+
 export {
     index,
     deleteUser as delete,
@@ -298,4 +313,5 @@ export {
     addFish,
     addComment,
     deleteFriend,
+    showFriend,
 }

@@ -1,0 +1,38 @@
+<%- include('../partials/html-head') %>
+<%- include('../partials/nav') %>
+
+<main>
+  <section class="data">
+    <section >
+      <div class="card" style="width: 18rem;">
+        <img src="<%= friend.avatar %>" class="card-img-top" alt="<%= friend.name %> avatar">
+        <div class="card-body">
+          <h5 class="card-title"><%= friend.name %></h5>
+          <p class="card-text">Mood:<%= friend.mood %></p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Fishing: 
+            <% if(friend.fishing?.length) {%>
+              <% friend.fishing.forEach(fish => { %>
+                  <button><%= fish.name %></button>
+              <% }) %>
+            <% } else { %>
+              You caught none!
+            <% } %>
+          </li>
+        </ul>
+        <div>
+          <form 
+            action="/users/<%= friend._id %>/sendMessage" 
+            method="POST"
+          >
+            <textarea name="content" id="" cols="30" rows="2"></textarea>
+            <button type="submit">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section> 
+  </section>
+</main>
+
+<%- include('../partials/footer') %>

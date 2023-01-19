@@ -14,7 +14,7 @@
           <li class="list-group-item">Friends:
             <% if(profile.friends?.length) {%>
               <% profile.friends.forEach(friend => { %>
-                  <button type="submit"><%= friend.name %></button>
+                <a href="/users/<%= friend._id %>/friend"><button type="submit"><%= friend.name %></button></a>
               <% }) %>
             <% } else { %>
               You are alone!
@@ -32,13 +32,14 @@
           <li class="list-group-item">Comments: 
             <% if(profile.comments?.length) {%>
               <% profile.comments.forEach(comment => { %>
-                <button>
-                  <p>
-                    <%= comment.from %> says: 
-                    <%= comment.content %> 
-                    to <%= comment.to %>
-                  </p>
-                </button>  
+                <% if(comment.from !== profile.name) { %>
+                  <button type="submit">
+                    <p>
+                      <%= comment.from %>: 
+                      <%= comment.content %> 
+                    </p>
+                  </button>
+                <% } %>  
               <% }) %>
             <% } else { %>
               You don't have any comment!

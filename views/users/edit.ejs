@@ -33,26 +33,25 @@
             You caught none!
           <% } %>
         </li>
-        <li class="list-group-item">Comments: 
+        <li class="list-group-item">Messages: 
           <% if(profile.comments?.length) {%>
             <% profile.comments.forEach(comment => { %>
-              <form action="/users/<%= friend._id %>/deleteFriend?_method=DELETE" method="POST">
-                <button type="submit">
-                  <p>
-                    <%= comment.from %> says: 
-                    <%= comment.content %> 
-                    to <%= comment.to %>
-                  </p>
-                </button>
-              </form>
+              <% if(comment.from !== profile.name) { %>
+                <form action="/users/<%= comment._id %>/deleteComment?_method=DELETE" method="POST">
+                  <button type="submit">
+                    <p>
+                      <%= comment.from %>: 
+                      <%= comment.content %> 
+                    </p>
+                  </button>
+                </form>
+              <% } %>
             <% }) %>
-          <% } else { %>
-            You don't have any comment!
           <% } %>
         </li>
       </ul>
       <div class="card-body">
-        <a href="/"><button>Back</button></a>
+        <a href="/users/mypage"><button>Back</button></a>
         <form 
           action="/users/<%= user._id %>/u?_method=DELETE" 
           method="POST"
