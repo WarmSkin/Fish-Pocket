@@ -57,7 +57,7 @@ function addComment(req, res) {
       req.body.from = profile.name
       req.body.sender = profile._id
       req.body.to = `${fishData.owner.name}'s ${fishData.name}`
-      req.body.receiver = fishData.owner._id
+      req.body.receiver = fishData._id
       Comment.create(req.body)
       .then(comment => {
         fishData.owner.comments.push(comment._id)

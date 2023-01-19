@@ -29,10 +29,10 @@
               You caught none!
             <% } %>
           </li>
-          <li class="list-group-item">Comments: 
+          <li class="list-group-item">Messages: 
             <% if(profile.comments?.length) {%>
               <% profile.comments.forEach(comment => { %>
-                <% if(comment.from !== profile.name) { %>
+                <% if(comment.from !== profile.name && comment.to === profile.name) { %>
                   <button type="submit">
                     <p>
                       <%= comment.from %>: 
@@ -41,9 +41,7 @@
                   </button>
                 <% } %>  
               <% }) %>
-            <% } else { %>
-              You don't have any comment!
-            <% } %>
+            <% } %> 
           </li>
         </ul>
         <div class="card-body">

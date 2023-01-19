@@ -36,7 +36,7 @@
         <li class="list-group-item">Messages: 
           <% if(profile.comments?.length) {%>
             <% profile.comments.forEach(comment => { %>
-              <% if(comment.from !== profile.name) { %>
+              <% if(comment.from !== profile.name && comment.to === profile.name) { %>
                 <form action="/users/<%= comment._id %>/deleteMessage?_method=DELETE" method="POST">
                   <button type="submit">
                     <p>
