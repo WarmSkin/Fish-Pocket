@@ -284,16 +284,16 @@ function sendMessageF(req, res) {
         profile1.save()
         profile2.comments.push(comment._id)
         profile2.save()
-        res.redirect(`/users/${friend._id}/friend`)
+        res.redirect(`/users/${profile1._id}/friend`)
       })
       .catch(error => {
         console.log(error)
-        res.redirect(`/users/${friend._id}/friend`)
+        res.redirect(`/users/${profile1._id}/friend`)
       })
     })
     .catch(error => {
       console.log(error)
-      res.redirect(`/users/${friend._id}/friend`)
+      res.redirect(`/users/${profile1._id}/friend`)
     })
   })
   .catch(error => {
