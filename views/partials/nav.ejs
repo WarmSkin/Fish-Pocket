@@ -4,10 +4,16 @@
 </head>
 <body>
   <nav>
-    <a href="/users/mypage">My Page</a>
-    <a href="/users">All Users</a>
-    <a href="/fish">Fish Caught</a>
-    <a href="/species">Fish Data</a>
+
+    <div class="dropdown">
+      <button class="dropbtn">Dropdown</button>
+      <div class="dropdown-content">
+        <a href="/users/mypage">My Page</a>
+        <a href="/users">All Users</a>
+        <a href="/fish">Fish Caught</a>
+        <a href="/species">Fish Data</a>
+      </div>
+    </div>
     <% if(user?.profile.level >= 900) {%>
       <a href="/users/maintenance">Maintenance</a>
     <% } %>
