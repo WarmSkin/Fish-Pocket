@@ -236,7 +236,7 @@ function addFish(req, res) {
   })
 }
 
-function addComment(req, res) {
+function addMessage(req, res) {
   Profile.findById(req.params.id)
   .then(profile1 => {
     Profile.findById(req.user.profile._id)
@@ -298,6 +298,31 @@ function showFriend(req, res) {
   })
 }
 
+function showFish(req, res) {
+  Fish.findById(req.params.fid)
+  .populate('species')
+  .populate('comments')
+  .then(fishData => {
+    Profile.findById(req.user.profile._id)
+    .then(myProfile => {
+      res.render('users/showFish', { 
+        title: 'Fish Caught',
+        fishData,
+        myProfile,
+      })
+    })
+    .catch(error => {
+      console.log(error)
+      res.redirect('/')
+    })
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect('/')
+  })
+}
+
+
 function deleteMessage(req, res) {
   Profile.findByIdAndUpdate(
     {_id: req.user.profile._id},
@@ -309,6 +334,83 @@ function deleteMessage(req, res) {
   .catch(error => {
     console.log(error)
     res.redirect(`/users/${req.user._id}/edit`)
+  })
+}
+
+function deleteComment(req, res) {
+  Fish.findByIdAndUpdate(
+    {_id: req.params.fid},
+    {$pull: { comments: req.params.cid}}
+  )
+  .then( fishData => {
+    Comment.findByIdAndDelete(req.params.cid)
+    .then(comment => {
+      Profile.findByIdAndUpdate(
+        {_id: comment.sender._id},
+        {$pull: { comments: comment._id}}
+      )
+      .then(profileS => {
+        Profile.findByIdAndUpdate(
+          {_id: comment.receiver._id},
+          {$pull: { comments: comment._id}}
+        )
+        .then(profileR => {
+          res.redirect(`/users/${req.params.fid}/afish`)
+        })
+        .catch(error => {
+          console.log(error)
+          res.redirect(`/users/${req.params.fid}/afish`)
+        })
+      })
+      .catch(error => {
+        console.log(error)
+        res.redirect(`/users/${req.params.fid}/afish`)
+      })
+    })
+    .catch(error => {
+      console.log(error)
+      res.redirect(`/users/${req.params.fid}/afish`)
+    })
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect(`/users/${req.params.fid}/afish`)
+  })
+}
+
+function addComment(req, res) {
+  Fish.findById(req.params.fid)
+  .populate('owner')
+  .then(fishData => {
+    Profile.findById(req.user.profile._id)
+    .then(profile => {
+      req.body.from = profile.name
+      req.body.sender = profile._id
+      req.body.to = `${fishData.owner.name}'s ${fishData.name}`
+      req.body.receiver = fishData._id
+      Comment.create(req.body)
+      .then(comment => {
+        fishData.owner.comments.push(comment._id)
+        fishData.owner.save()
+        fishData.comments.push(comment._id)
+        fishData.save()
+        profile.comments.push(comment._id)
+        profile.save()
+        res.redirect(`/users/${req.params.fid}/afish`)
+      })
+      .catch(error => {
+        console.log(error)
+        res.redirect(`/users/${req.params.fid}/afish`)
+      })
+    })
+    .catch(error => {
+      console.log(error)
+      res.redirect(`/users/${req.params.fid}/afish`)
+    })
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect(`/users/${req.params.fid}/afish`)
   })
 }
 
@@ -325,8 +427,11 @@ export {
     addFriend,
     show,
     addFish,
-    addComment,
+    addMessage,
     deleteFriend,
     showFriend,
+    showFish,
     deleteMessage,
+    deleteComment,
+    addComment,
 }

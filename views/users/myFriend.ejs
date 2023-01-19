@@ -14,7 +14,11 @@
           <li class="list-group-item">Fishing: 
             <% if(friend.fishing?.length) {%>
               <% friend.fishing.forEach(fish => { %>
-                  <button><%= fish.name %></button>
+                <a href="/users/<%= fish._id %>/afish">
+                  <button type="submit">
+                    <%= fish.length %>" <%= fish.name %> on <%= fish.caughtDate.toISOString().slice(0, 10) %>
+                  </button>
+                </a>
               <% }) %>
             <% } else { %>
               You caught none!
