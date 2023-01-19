@@ -8,7 +8,7 @@
         <img src="<%= profile.avatar %>" class="card-img-top" alt="<%= profile.name %> avatar">
         <div class="card-body">
           <h5 class="card-title"><%= profile.name %></h5>
-          <p class="card-text">Mood:<%= profile.mood %></p>
+          <p class="card-text">Mood: <%= profile.mood %></p>
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">Friends:
@@ -20,7 +20,7 @@
               You are alone!
             <% } %> 
           </li>
-          <li class="list-group-item">Fishing: 
+          <li class="list-group-item">Fish: 
             <% if(profile.fishing?.length) {%>
               <% profile.fishing.forEach(fish => { %>
                 <a href="/users/<%= fish._id %>/afish">

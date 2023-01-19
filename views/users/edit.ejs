@@ -8,7 +8,7 @@
       <img src="<%= profile.avatar %>" class="card-img-top" alt="<%= profile.name %> avatar">
       <div class="card-body">
         <h5 class="card-title"><%= profile.name %></h5>
-        <p class="card-text">Mood:<%= profile.mood %></p>
+        <p class="card-text">Mood: <%= profile.mood %></p>
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">Friends:
@@ -22,7 +22,7 @@
             You are alone!
           <% } %> 
         </li>
-        <li class="list-group-item">Fishing: 
+        <li class="list-group-item">Fish: 
           <% if(profile.fishing?.length) {%>
             <% profile.fishing.forEach(fish => { %>
               <form action="/fish/<%= fish._id %>?_method=DELETE" method="POST">
@@ -66,7 +66,7 @@
         <input type="text" name="name" id="user-name" value="<%= profile.name %>">
         <label for="user-avatar">AvatarURL:</label>
         <textarea name="avatar" id="user-avatar" cols="30" rows="5"><%= profile.avatar %></textarea>
-        <label for="user-mood">Mood:</label>
+        <label for="user-mood">Mood: </label>
       <textarea name="mood" id="user-mood" cols="30" rows="5"><%= profile.mood %></textarea>
         <button type="submit">Update</button>
       </form>

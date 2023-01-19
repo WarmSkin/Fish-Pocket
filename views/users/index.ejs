@@ -11,10 +11,10 @@
               <img src="<%= otherUser.profile.avatar %>" class="card-img-top" alt="<%= otherUser.profile.name %> avatar">
               <div class="card-body">
                 <h5 class="card-title"><%= otherUser.profile.name %></h5>
-                <p class="card-text">Mood:<%= otherUser.profile.mood %></p>
+                <p class="card-text">Mood: <%= otherUser.profile.mood %></p>
               </div>
               <ul class="list-group list-group-flush">
-                <li class="list-group-item">Fishing: 
+                <li class="list-group-item">Fish: 
                   <% if(otherUser.profile.fishing?.length) {%>
                     <% otherUser.profile.fishing.forEach(fish => { %>
                         <button><%= fish.name %></button>

@@ -7,10 +7,10 @@
       <img src="<%= friend.avatar %>" class="card-img-top" alt="<%= friend.name %> avatar">
       <div class="card-body">
         <h5 class="card-title"><%= friend.name %></h5>
-        <p class="card-text">Mood:<%= friend.mood %></p>
+        <p class="card-text">Mood: <%= friend.mood %></p>
       </div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">Fishing: 
+        <li class="list-group-item">Fish: 
           <% if(friend.fishing?.length) {%>
             <% friend.fishing.forEach(fish => { %>
               <a href="/users/<%= fish._id %>/afish">
