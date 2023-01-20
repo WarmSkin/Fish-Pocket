@@ -37,7 +37,7 @@
     <div>
       <% if(myProfile.comments?.length) {%>
         <% myProfile.comments.forEach(comment => { %>
-          <% if(comment.to === friend.name || comment.to === myProfile.name) { %>
+          <% if(comment.receiver.equals(friend._id) && comment.sender.equals(myProfile._id) || comment.receiver.equals(myProfile._id) && comment.sender.equals(friend._id)) { %>
             <div>
               <button type="submit">
                   <%= myProfile.name === comment.from ? "You" : comment.from %>: 

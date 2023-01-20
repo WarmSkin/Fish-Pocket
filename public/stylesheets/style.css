@@ -95,6 +95,7 @@ button {
 
 div.card {
   border: 2px solid black;
+  margin: 5px;
 }
 
 li.list-group-item {
@@ -114,10 +115,6 @@ select, input, textarea, form {
   padding: 10px 0;
   font-size: 18px;
   display: inline-block;
-}
-
-.profile-avatar {
-  margin-top: 50px;
 }
 
 .card-body {
