@@ -5,7 +5,7 @@ import { Species } from "../models/species.js"
 
 function index(req, res) {
   Fish.find({})
-  .sort({caughtDate: -1})
+  .sort({createdAt: -1})
   .populate('species')
   .populate('comments')
   .then(fish => {
