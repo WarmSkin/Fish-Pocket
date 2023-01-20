@@ -36,12 +36,12 @@
         <li class="list-group-item">End: <%= fishData.seasonEndDate.toJSON().slice(0, 10) %></li>
       </ul>
       <div class="card-body">
-        <a href="/species/"><button>Go Back</button></a>
+        <a href="/users/maintenance"><button>Go Back</button></a>
         <form 
           action="/species/<%= fishData._id %>?_method=DELETE" 
           method="POST"
         >
-          <button>Delete</button>
+          <button style="color: red;">Delete</button>
         </form>
       </div>
     </div>

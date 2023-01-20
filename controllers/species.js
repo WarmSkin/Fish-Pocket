@@ -23,22 +23,22 @@ function newSpecies(req, res) {
 
   Species.create(req.body)
   .then(species => {
-    res.redirect('/species')
+    res.redirect('users/maintenance')
   })
   .catch(error => {
     console.log(error),
-    res.redirect('/species')
+    res.redirect('users/maintenance')
   })
 }
 
 function deleteSpecies(req, res) {
   Species.findByIdAndDelete(req.params.id)
   .then(species => {
-    res.redirect('/species')
+    res.redirect('users/maintenance')
   })
   .catch(error => {
     console.log(error)
-    res.redirect('/species')
+    res.redirect('users/maintenance')
   })
 }
 
