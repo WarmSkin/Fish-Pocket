@@ -12,8 +12,8 @@ html {
 }
 
 body {
-  background-color: #1a1a1a;
-  color: #f6f6f6;
+  background-color:#376243;
+  color: black;
   /* Use a system font, if none are available use any found sans-sarif font */
   font-family: system-ui, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 
     'Helvetica Neue', sans-serif;
@@ -84,7 +84,26 @@ nav > a {
 
 nav > img {
   margin: 0px 30px;
-  width: 80px;
+  width: 70px;
+}
+
+button {
+  border-radius: 10px;
+  margin: 2px;
+  background-color: #00786d;
+}
+
+div.card {
+  border: 2px solid black;
+}
+
+li.list-group-item {
+  background-color: cadetblue;
+  border: none;
+}
+
+select, input, textarea, form {
+  background-color: cadetblue;
 }
 
 .btn {
@@ -101,6 +120,10 @@ nav > img {
   margin-top: 50px;
 }
 
+.card-body {
+  background-color:cadetblue;
+}
+
 .data {
   display: flex;
   flex-wrap: wrap;
@@ -109,6 +132,7 @@ nav > img {
 .data > div {
   margin-left: 0.5vw;
   margin-right: 0.5vw;
+  background-color:cadetblue;
 }
 
 #edit-form {
@@ -118,7 +142,7 @@ nav > img {
 
 #googleBtn {
   background-color: #00786d;
-  border-radius: 100px;
+  border-radius: 10px;
   border: none;
 }
 
@@ -129,7 +153,7 @@ nav > img {
   padding: 9px;
   font-size: 16px;
   border: none;
-  border-radius: 100px;
+  border-radius: 10px;
 }
 
 /* The container <div> - needed to position the dropdown content */
