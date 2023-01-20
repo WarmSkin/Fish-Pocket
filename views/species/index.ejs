@@ -6,25 +6,34 @@
   <section class="data">
   <% if(species.length) {%>
     <% species.forEach(fishData => { %>
-      <div class="card" style="width: 18rem;">
-        <img src="<%= fishData.avatar %>" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title"><%= fishData.name %></h5>
-          <p class="card-text"><%= fishData.content %></p>
+      <div class="dropdown">
+        <button class="dropbtn"><%= fishData.name %></button>
+        <div class="dropdown-content">
+          <div class="card" style="width: 18rem;">
+            <img src="<%= fishData.avatar %>" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title"><%= fishData.name %></h5>
+              <p class="card-text"><%= fishData.content %></p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <% if(fishData.habits.length) {%>
+                  <% fishData.habits.forEach(habit => { %>
+                    <div class="dropdown1">
+                      <button class="dropbtn1"><%= habit.name %></button>
+                      <div class="dropdown-content1">
+                        <a><%= habit.content %></a>
+                      </div>
+                    </div>
+                  <% }) %>
+                <% } %>
+              </li>
+              <li class="list-group-item">Keeper: <%= fishData.keeperLength %> </li>
+              <li class="list-group-item">Season Start: <%= fishData.seasonStartDate.toJSON().slice(0, 10) %></li>
+              <li class="list-group-item">End: <%= fishData.seasonEndDate.toJSON().slice(0, 10) %></li>
+            </ul>
+          </div>
         </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <% if(fishData.habits.length) {%>
-              <% fishData.habits.forEach(habit => { %>
-                  <button><%= habit.name %></button>
-                </form>
-              <% }) %>
-            <% } %>
-          </li>
-          <li class="list-group-item">Keeper: <%= fishData.keeperLength %> </li>
-          <li class="list-group-item">Season Start: <%= fishData.seasonStartDate.toJSON().slice(0, 10) %></li>
-          <li class="list-group-item">End: <%= fishData.seasonEndDate.toJSON().slice(0, 10) %></li>
-        </ul>
       </div>
     <% }) %>
   <% } %>

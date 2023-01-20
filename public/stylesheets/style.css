@@ -73,17 +73,12 @@ pre {
   font-size: 14px;
 }
 
-nav > a {
-  margin: 10px 30px;
-  text-decoration: none;
-  font-size: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+nav > a, nav > div {
+  margin: 0px 15px;
 }
 
 nav > img {
-  margin: 0px 30px;
+  margin: 0px 15px;
   width: 70px;
 }
 
@@ -143,8 +138,11 @@ select, input, textarea, form {
   border: none;
 }
 
+
+/* 2 layers Dropdown! */
+
 /* Dropdown Button */
-.dropbtn {
+.dropbtn, .dropbtn1 {
   background-color: #00786d;
   color: white; 
   padding: 9px;
@@ -154,23 +152,23 @@ select, input, textarea, form {
 }
 
 /* The container <div> - needed to position the dropdown content */
-.dropdown {
+.dropdown, .dropdown1{
   position: relative;
   display: inline-block;
 }
 
 /* Dropdown Content (Hidden by Default) */
-.dropdown-content {
+.dropdown-content, .dropdown-content1{
   display: none;
   position: absolute;
   background-color: #00786d;
-  min-width: 160px;
+  min-width: 120px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
 
 /* Links inside the dropdown */
-.dropdown-content a {
+.dropdown-content a, .dropdown-content1 a {
   color: #233E2A;
   padding: 12px 16px;
   text-decoration: none;
@@ -178,10 +176,11 @@ select, input, textarea, form {
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ddd;}
+.dropdown-content a:hover, .dropdown-content1 a:hover {background-color: #ddd;}
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {display: block;}
+.dropdown1:hover .dropdown-content1 {display: block;}
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {background-color: #009b8e;}
+.dropdown:hover .dropbtn, .dropdown1:hover .dropbtn1 {background-color: #009b8e;}
