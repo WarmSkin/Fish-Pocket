@@ -9,12 +9,13 @@
         <h5 class="card-title"><%= friend.name %></h5>
         <p class="card-text">Mood: <%= friend.mood %></p>
       </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">Fish: 
+      <div class="dropdown">
+        <button class="dropbtn">Fish</button>
+        <div class="dropdown-content">
           <% if(friend.fishing?.length) {%>
             <% friend.fishing.forEach(fish => { %>
               <a href="/users/<%= fish._id %>/afish">
-                <button type="submit">
+                <button>
                   <%= fish.length %>" <%= fish.name %> on <%= fish.caughtDate.toISOString().slice(0, 10) %>
                 </button>
               </a>
@@ -22,8 +23,28 @@
           <% } else { %>
             You caught none!
           <% } %>
-        </li>
-      </ul>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Messages</button>
+        <div class="dropdown-content">
+          <% if(myProfile.comments?.length) {%>
+            <% myProfile.comments.forEach(comment => { %>
+              <% if(comment.receiver.equals(friend._id) && comment.sender.equals(myProfile._id) || comment.receiver.equals(myProfile._id) && comment.sender.equals(friend._id)) { %>
+                <div class="dropdown1">
+                  <button class="dropbtn1"><%= comment.sender.equals(myProfile._id) ? "You" : comment.from %>: 
+                    <%= comment.content %></button>
+                  <div class="dropdown-content1">
+                    <p><button>
+                      <%= comment.createdAt.toISOString().slice(0, 16).replace("T"," ") %>  
+                    </button></p>
+                  </div>
+                </div>
+              <% } %>  
+            <% }) %>
+          <% } %> 
+        </div>
+      </div>
       <div>
         <form 
           action="/users/<%= friend._id %>/sendMessageF" 
@@ -33,20 +54,6 @@
           <button type="submit">Send Message</button>
         </form>
       </div>
-    </div>
-    <div>
-      <% if(myProfile.comments?.length) {%>
-        <% myProfile.comments.forEach(comment => { %>
-          <% if(comment.receiver.equals(friend._id) && comment.sender.equals(myProfile._id) || comment.receiver.equals(myProfile._id) && comment.sender.equals(friend._id)) { %>
-            <div>
-              <button type="submit">
-                  <%= myProfile.name === comment.from ? "You" : comment.from %>: 
-                  <%= comment.content %> 
-              </button>
-            </div>
-          <% } %>  
-        <% }) %>
-      <% } %> 
     </div>
   </section>
 </main>

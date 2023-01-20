@@ -6,7 +6,7 @@
   <section class="data">
   <% if(species.length) {%>
     <% species.forEach(fishData => { %>
-      <div class="dropdown">
+      <div class="dropdown" id="page-dropdown">
         <button class="dropbtn"><%= fishData.name %></button>
         <div class="dropdown-content">
           <div class="card" style="width: 18rem;">

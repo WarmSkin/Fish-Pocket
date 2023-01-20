@@ -11,29 +11,34 @@
               <img src="<%= otherUser.profile.avatar %>" class="card-img-top" alt="<%= otherUser.profile.name %> avatar">
               <div class="card-body">
                 <h5 class="card-title"><%= otherUser.profile.name %></h5>
-                <p class="card-text">Mood: <%= otherUser.profile.mood %></p>
+                <p class="card-text">Mood:<%= otherUser.profile.mood %></p>
               </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">Fish: 
+              <div class="dropdown">
+                <button class="dropbtn">Fish</button>
+                <div class="dropdown-content">
                   <% if(otherUser.profile.fishing?.length) {%>
                     <% otherUser.profile.fishing.forEach(fish => { %>
-                        <button><%= fish.name %></button>
+                      <a href="/users/<%= fish._id %>/afish">
+                        <button>
+                          <%= fish.length %>" <%= fish.name %> on <%= fish.caughtDate.toISOString().slice(0, 10) %>
+                        </button>
+                      </a>
                     <% }) %>
                   <% } else { %>
                     You caught none!
                   <% } %>
-                </li>
-              </ul>
+                </div>
+              </div>
               <!-- Checking if the person is my friend, display 'My Friend' instead of 'Add Friend' -->
               <% if(myProfile.friends.length) {%>
                   <% for(let i = 0; i< myProfile.friends.length; i++) { %>
                     <% if(myProfile.friends[i].equals(otherUser.profile._id)) {%>
-                      <div class="card-body">
+                      <div>
                         <button>My Friend</button>
-                      </div> 
+                      </div>
                     <% break} %>
                     <% if(i === (myProfile.friends.length -1)) {%>
-                      <div class="card-body">
+                      <div>
                         <form 
                           action="/users/<%= otherUser.profile._id %>/addFriend" 
                           method="POST"
@@ -44,14 +49,14 @@
                     <% } %>  
                   <% } %>
                 <% } else { %>
-                    <div class="card-body">
-                      <form 
-                        action="/users/<%= otherUser.profile._id %>/addFriend" 
-                        method="POST"
-                      >
-                        <button>Add Friend</button>
-                      </form>
-                    </div>
+                  <div>
+                    <form 
+                      action="/users/<%= otherUser.profile._id %>/addFriend" 
+                      method="POST"
+                    >
+                      <button>Add Friend</button>
+                    </form>
+                  </div>
                 <% } %>  
               <div>
                 <form 

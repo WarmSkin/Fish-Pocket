@@ -5,10 +5,13 @@ const router = Router()
 
 router.get('/', speciesCtrl.index)
 router.get('/:id/edit', speciesCtrl.edit)
+
 router.post('/new', speciesCtrl.new)
 router.post('/:id/:hid', speciesCtrl.addHabit)
-router.delete('/:id/:hid', speciesCtrl.deleteHabit)
+
 router.delete('/:id', speciesCtrl.delete)
+router.delete('/:id/:hid', speciesCtrl.deleteHabit)
+
 router.put('/:id/', speciesCtrl.update)
 
 export {

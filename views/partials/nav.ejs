@@ -5,9 +5,9 @@
 <body>
   <nav>
     <img src="/asserts/icons/favicon.png" alt="fish-logo">
-    <div class="dropdown">
+    <div class="dropdown" id="nav-dropdown">
       <button class="dropbtn">My Page</button>
-      <div class="dropdown-content">
+      <div class="dropdown-content" id="nav-drop-content">
         <a href="/users/mypage">My Page</a>
         <a href="/users">All Users</a>
         <a href="/fish">Fish Caught</a>
@@ -22,7 +22,7 @@
         <button type="submit" id="googleBtn"><img src="/asserts/icons/door.png" alt="logout-logo" style="width: 40px;"></button>
       </a>
     <% } else { %>
-      <div class="dropdown">
+      <div class="dropdown" id="nav-dropdown">
         <button class="dropbtn">Sign In</button>
         <div class="dropdown-content">
         <div 
@@ -44,3 +44,6 @@
     </div>
     <% } %>
   </nav>
+  <% if(!user) { %>
+    <img src="/asserts/homepage/homepage.jpg" alt="home-page" id="homepage">
+  <% } %> 

@@ -16,8 +16,8 @@ function index(req, res) {
     .then(myProfile => {
       res.render("users/index", { 
         title: "All Users",
-        users,
         myProfile,
+        users,
       })
     })
     .catch(error => {
@@ -460,24 +460,24 @@ function addComment(req, res) {
 }
 
 export {
-    index,
-    deleteUser as delete,
-    editUser,
-    updateUser,
-    maintenance,
-    createHabit,
-    deleteHabit,
-    editHabit,
-    updateHabit,
-    addFriend,
     show,
+    index,
+    editUser,
+    editHabit,
     addFish,
+    addFriend,
+    addComment,
+    createHabit,
+    updateUser,
+    updateHabit,
+    showFish,
+    showFriend,
     sendMessage,
     sendMessageF,
+    deleteHabit,
     deleteFriend,
-    showFriend,
-    showFish,
     deleteMessage,
     deleteComment,
-    addComment,
+    deleteUser as delete,
+    maintenance,
 }

@@ -4,6 +4,7 @@ import { Comment } from "../models/comment.js"
 
 function index(req, res) {
   Fish.find({})
+  .sort({caughtDate: -1})
   .populate('species')
   .populate('comments')
   .then(fish => {

@@ -37,21 +37,26 @@
         </div>
       <% }) %>
     <% } %>
-    <form action="/species/new" method="POST" id="edit-form">
-      <label for="species-name">Name:</label>
-      <input type="text" name="name" id="species-name">
-      <label for="species-avatar">AvatarURL:</label>
-      <textarea name="avatar" id="species-avatar" cols="30" rows="5"></textarea>
-      <label for="species-keeper">Keeper Length:</label>
-      <input type="text" name="keeperLength" id="species-keeper">
-      <label for="species-seasonS">Season Start:</label>
-      <input type="date" name="seasonStartDate" id="species-seasonS">
-      <label for="species-seasonE">Season End:</label>
-      <input type="date" name="seasonEndDate" id="species-seasonE">
-      <label for="species-content">Content:</label>
-      <textarea name="content" id="species-content" cols="30" rows="10"></textarea>
-      <button type="submit">Add Data</button>
-    </form>
+    <div class="dropdown" id="page-dropdown2">
+      <button class="dropbtn">Add New Species</button>
+      <div class="dropdown-content">
+        <form action="/species/new" method="POST" id="edit-form">
+          <label for="species-name">Name:</label>
+          <input type="text" name="name" id="species-name">
+          <label for="species-avatar">AvatarURL:</label>
+          <textarea name="avatar" id="species-avatar" cols="30" rows="5"></textarea>
+          <label for="species-keeper">Keeper Length:</label>
+          <input type="text" name="keeperLength" id="species-keeper">
+          <label for="species-seasonS">Season Start:</label>
+          <input type="date" name="seasonStartDate" id="species-seasonS">
+          <label for="species-seasonE">Season End:</label>
+          <input type="date" name="seasonEndDate" id="species-seasonE">
+          <label for="species-content">Content:</label>
+          <textarea name="content" id="species-content" cols="30" rows="10"></textarea>
+          <button type="submit">Add Data</button>
+        </form>
+      </div>
+    </div>
   </section>
   <section class="data">
     <% if(habits.length) {%>
@@ -73,15 +78,17 @@
         </div>
       <% }) %>
     <% } %>
-    <div>
-      <h3>Add New Habit</h3>
-      <form action="/users/habits" method="Post" id="edit-form">
-        <label for="habit-name">Name: </label>
-        <input type="text" name="name" id="habit-name">
-        <label for="habit-content">Content: </label>
-        <textarea name="content" id="habit-content" cols="30" rows="5"></textarea>
-        <button type="submit">Add Habit</button>
-      </form>
+    <div class="dropdown" id="page-dropdown2">
+      <button class="dropbtn">Add New Habit</button>
+      <div class="dropdown-content">
+        <form action="/users/habits" method="Post" id="edit-form">
+          <label for="habit-name">Name: </label>
+          <input type="text" name="name" id="habit-name">
+          <label for="habit-content">Content: </label>
+          <textarea name="content" id="habit-content" cols="30" rows="5"></textarea>
+          <button type="submit">Add Habit</button>
+        </form>
+      </div>
     </div>
   </section>
 </main>
