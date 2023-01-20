@@ -10,45 +10,81 @@
         <h5 class="card-title"><%= profile.name %></h5>
         <p class="card-text">Mood: <%= profile.mood %></p>
       </div>
+      <div class="dropdown">
+        <button class="dropbtn">Update</button>
+        <div class="dropdown-content">
+          <form action="/users/<%= user._id %>/updateUser?_method=PUT" method="POST" id="edit-form">
+            <label for="user-name">Name:</label>
+            <input type="text" name="name" id="user-name" value="<%= profile.name %>">
+            <label for="user-avatar">AvatarURL:</label>
+            <textarea name="avatar" id="user-avatar" cols="30" rows="5"><%= profile.avatar %></textarea>
+            <label for="user-mood">Mood: </label>
+          <textarea name="mood" id="user-mood" cols="30" rows="5"><%= profile.mood %></textarea>
+            <button type="submit">Update</button>
+          </form>
+        </div>
+      </div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">Friends:
-          <% if(profile.friends?.length) {%>
-            <% profile.friends.forEach(friend => { %>
-              <form action="/users/<%= friend._id %>/deleteFriend?_method=DELETE" method="POST">
-                <button type="submit"><%= friend.name %></button>
-              </form>
-            <% }) %>
-          <% } else { %>
-            You are alone!
-          <% } %> 
-        </li>
-        <li class="list-group-item">Fish: 
-          <% if(profile.fishing?.length) {%>
-            <% profile.fishing.forEach(fish => { %>
-              <form action="/fish/<%= fish._id %>?_method=DELETE" method="POST">
-                <button type="submit"><%= fish.name %></button>
-              </form>
-            <% }) %>
-          <% } else { %>
-            You caught none!
-          <% } %>
-        </li>
-        <li class="list-group-item">Messages: 
-          <% if(profile.comments?.length) {%>
-            <% profile.comments.forEach(comment => { %>
-              <% if(comment.from !== profile.name && comment.to === profile.name) { %>
-                <form action="/users/<%= comment._id %>/deleteMessage?_method=DELETE" method="POST">
-                  <button type="submit">
-                    <p>
+        <div class="dropdown">
+          <button class="dropbtn">Friends</button>
+          <div class="dropdown-content">
+            <% if(profile.friends?.length) {%>
+              <% profile.friends.forEach(friend => { %>
+                <div class="dropdown1">
+                  <button class="dropbtn1"><%= friend.name %></button>
+                  <div class="dropdown-content1"> 
+                    <form action="/users/<%= friend._id %>/deleteFriend?_method=DELETE" method="POST">
+                      <button style="color: red;">Delete</button>
+                    </form>
+                </div>
+              </div>
+              <% }) %>
+            <% } else { %>
+              You are alone!
+            <% } %> 
+          </div>
+        </div>
+        <div class="dropdown">
+          <button class="dropbtn">Fish</button>
+          <div class="dropdown-content"> 
+            <% if(profile.fishing?.length) {%>
+              <% profile.fishing.forEach(fish => { %>
+                <div class="dropdown1">
+                  <button class="dropbtn1"><%= fish.length %>" <%= fish.name %> on <%= fish.caughtDate.toISOString().slice(0, 10) %></button>
+                  <div class="dropdown-content1">
+                    <form action="/fish/<%= fish._id %>?_method=DELETE" method="POST">
+                      <button style="color: red;">Delete</button>
+                    </form>
+                  </div>
+                </div>
+              <% }) %>
+            <% } else { %>
+              You caught none!
+            <% } %>
+          </div>
+        </div>
+        <div class="dropdown">
+          <button class="dropbtn">Messages</button>
+          <div class="dropdown-content">
+            <% if(profile.comments?.length) {%>
+              <% profile.comments.forEach(comment => { %>
+                <% if(!comment.sender.equals(profile._id) && comment.to === profile.name) { %>
+                  <div class="dropdown1">
+                    <button class="dropbtn1">
                       <%= comment.from %>: 
-                      <%= comment.content %> 
-                    </p>
-                  </button>
-                </form>
-              <% } %>
-            <% }) %>
-          <% } %>
-        </li>
+                      <%= comment.content %>
+                    </button>
+                    <div class="dropdown-content1">
+                      <form action="/users/<%= comment._id %>/deleteMessage?_method=DELETE" method="POST">
+                        <button style="color: red;">Delete</button>
+                      </form>
+                    </div>
+                  </div>
+                <% } %>
+              <% }) %>
+            <% } %>
+          </div>
+        </div>
       </ul>
       <div class="card-body">
         <a href="/users/mypage"><button>Back</button></a>
@@ -56,20 +92,9 @@
           action="/users/<%= user._id %>/u?_method=DELETE" 
           method="POST"
         >
-          <button>Delete</button>
+          <button style="color: red;">Delete Account!</button>
         </form>
       </div>
-    </div>
-    <div>
-      <form action="/users/<%= user._id %>/updateUser?_method=PUT" method="POST" id="edit-form">
-        <label for="user-name">Name:</label>
-        <input type="text" name="name" id="user-name" value="<%= profile.name %>">
-        <label for="user-avatar">AvatarURL:</label>
-        <textarea name="avatar" id="user-avatar" cols="30" rows="5"><%= profile.avatar %></textarea>
-        <label for="user-mood">Mood: </label>
-      <textarea name="mood" id="user-mood" cols="30" rows="5"><%= profile.mood %></textarea>
-        <button type="submit">Update</button>
-      </form>
     </div>
   </section>
 </main>

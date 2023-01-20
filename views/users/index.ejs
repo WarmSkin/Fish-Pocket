@@ -6,69 +6,74 @@
   <% if(users?.length) { %>
     <section class="data">
       <% users.forEach(otherUser => { %>
-          <section >
-            <div class="card" style="width: 18rem;">
-              <img src="<%= otherUser.profile.avatar %>" class="card-img-top" alt="<%= otherUser.profile.name %> avatar">
-              <div class="card-body">
-                <h5 class="card-title"><%= otherUser.profile.name %></h5>
-                <p class="card-text">Mood:<%= otherUser.profile.mood %></p>
-              </div>
-              <div class="dropdown">
-                <button class="dropbtn">Fish</button>
-                <div class="dropdown-content">
-                  <% if(otherUser.profile.fishing?.length) {%>
-                    <% otherUser.profile.fishing.forEach(fish => { %>
-                      <a href="/users/<%= fish._id %>/afish">
-                        <button>
-                          <%= fish.length %>" <%= fish.name %> on <%= fish.caughtDate.toISOString().slice(0, 10) %>
-                        </button>
-                      </a>
-                    <% }) %>
+        <div class="dropdown1" id="page-dropdown">
+          <button class="dropbtn1"><%= otherUser.profile.name %></button>
+          <div class="dropdown-content1">
+            <section >
+              <div class="card" style="width: 18rem;">
+                <img src="<%= otherUser.profile.avatar %>" class="card-img-top" alt="<%= otherUser.profile.name %> avatar">
+                <div class="card-body">
+                  <h5 class="card-title"><%= otherUser.profile.name %></h5>
+                  <p class="card-text">Mood:<%= otherUser.profile.mood %></p>
+                </div>
+                <div class="dropdown">
+                  <button class="dropbtn">Fish</button>
+                  <div class="dropdown-content">
+                    <% if(otherUser.profile.fishing?.length) {%>
+                      <% otherUser.profile.fishing.forEach(fish => { %>
+                        <a href="/users/<%= fish._id %>/afish">
+                          <button>
+                            <%= fish.length %>" <%= fish.name %> on <%= fish.caughtDate.toISOString().slice(0, 10) %>
+                          </button>
+                        </a>
+                      <% }) %>
+                    <% } else { %>
+                      You caught none!
+                    <% } %>
+                  </div>
+                </div>
+                <!-- Checking if the person is my friend, display 'My Friend' instead of 'Add Friend' -->
+                <% if(myProfile.friends.length) {%>
+                    <% for(let i = 0; i< myProfile.friends.length; i++) { %>
+                      <% if(myProfile.friends[i].equals(otherUser.profile._id)) {%>
+                        <div>
+                          <button>My Friend</button>
+                        </div>
+                      <% break} %>
+                      <% if(i === (myProfile.friends.length -1)) {%>
+                        <div>
+                          <form 
+                            action="/users/<%= otherUser.profile._id %>/addFriend" 
+                            method="POST"
+                          >
+                            <button>Add Friend</button>
+                          </form>
+                        </div>
+                      <% } %>  
+                    <% } %>
                   <% } else { %>
-                    You caught none!
-                  <% } %>
+                    <div>
+                      <form 
+                        action="/users/<%= otherUser.profile._id %>/addFriend" 
+                        method="POST"
+                      >
+                        <button>Add Friend</button>
+                      </form>
+                    </div>
+                  <% } %>  
+                <div>
+                  <form 
+                    action="/users/<%= otherUser.profile._id %>/sendMessage" 
+                    method="POST"
+                  >
+                    <textarea name="content" id="" cols="30" rows="2"></textarea>
+                    <button type="submit">Send Message</button>
+                  </form>
                 </div>
               </div>
-              <!-- Checking if the person is my friend, display 'My Friend' instead of 'Add Friend' -->
-              <% if(myProfile.friends.length) {%>
-                  <% for(let i = 0; i< myProfile.friends.length; i++) { %>
-                    <% if(myProfile.friends[i].equals(otherUser.profile._id)) {%>
-                      <div>
-                        <button>My Friend</button>
-                      </div>
-                    <% break} %>
-                    <% if(i === (myProfile.friends.length -1)) {%>
-                      <div>
-                        <form 
-                          action="/users/<%= otherUser.profile._id %>/addFriend" 
-                          method="POST"
-                        >
-                          <button>Add Friend</button>
-                        </form>
-                      </div>
-                    <% } %>  
-                  <% } %>
-                <% } else { %>
-                  <div>
-                    <form 
-                      action="/users/<%= otherUser.profile._id %>/addFriend" 
-                      method="POST"
-                    >
-                      <button>Add Friend</button>
-                    </form>
-                  </div>
-                <% } %>  
-              <div>
-                <form 
-                  action="/users/<%= otherUser.profile._id %>/sendMessage" 
-                  method="POST"
-                >
-                  <textarea name="content" id="" cols="30" rows="2"></textarea>
-                  <button type="submit">Send Message</button>
-                </form>
-              </div>
-            </div>
-          </section> 
+            </section>
+          </div>
+        </div>
       <% }) %>
     </section>
   <% } %>

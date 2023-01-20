@@ -22,15 +22,12 @@ Join now to share your biggest catch!🎣
 - Mongoose
 - JavaScript
 
-<!-- ## Credits 🙌 -->
-
-<!-- - Check out [Animate.style](https://animate.style/). -->
-
 ## Recent Changes 🧹
 
-- Allow users to view messages with their friends
 - Allow users to view their friends' profiles
 - Allow users to send message to their friends
+- Allow users to view messages with their friends
+- Allow users to view information from dropdown buttons
 
 ## Ice Box 🧊
 
