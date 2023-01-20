@@ -9,7 +9,8 @@ const SpeciesSchema = new Schema({
   keeperLength: String,
   seasonStartDate: Date,
   seasonEndDate: Date,
-  habits: [{type: Schema.Types.ObjectId, ref: "Habit"}]
+  habits: [{type: Schema.Types.ObjectId, ref: "Habit"}],
+  ownerFish: [{type: Schema.Types.ObjectId, ref: "Fish"}],
 }, {
   timestamps: true
 })

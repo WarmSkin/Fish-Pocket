@@ -210,6 +210,8 @@ function addFish(req, res) {
     .then(fish => {
       Species.findById(fish.species._id)
       .then(species => {
+        species.ownerFish.push(fish._id)
+        species.save()
         fish.name = species.name
         fish.save()
         profile.fishing.push(fish._id)

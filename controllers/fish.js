@@ -1,6 +1,7 @@
 import { Fish } from "../models/fish.js"
 import { Profile } from "../models/profile.js"
 import { Comment } from "../models/comment.js"
+import { Species } from "../models/species.js"
 
 function index(req, res) {
   Fish.find({})
@@ -35,7 +36,17 @@ function deleteFish(req, res) {
       {$pull: { fishing: fish._id}}
       )
     .then(profile => {
-        res.redirect(`/users/${fish.owner._id}/edit`)
+      Species.findOneAndUpdate(
+        {_id: fish.species._id},
+        {$pull: { ownerFish: fish._id }}
+        )
+        .then(speicies => {
+          res.redirect(`/users/${fish.owner._id}/edit`)
+        })
+        .catch(error => {
+          console.log(error)
+          res.redirect(`/users/${fish.owner._id}/edit`)
+        })
     })
     .catch(error => {
       console.log(error)

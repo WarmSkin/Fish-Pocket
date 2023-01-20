@@ -1,12 +1,13 @@
 import { Species } from "../models/species.js";
 import { Habit } from "../models/habit.js";
+import { Fish } from "../models/fish.js";
 
 function index(req, res) {
   Species.find({})
   .populate('habits')
   .then(species => {
     res.render('species/index', { 
-      title: "FishData Page",
+      title: "Fish Data Page",
       species,
     })
   })
@@ -34,7 +35,16 @@ function newSpecies(req, res) {
 function deleteSpecies(req, res) {
   Species.findByIdAndDelete(req.params.id)
   .then(species => {
-    res.redirect('/users/maintenance')
+    Fish.deleteMany(
+      {_id: { $in: species.ownerFish}}
+      )
+    .then(fish => {
+      res.redirect('/users/maintenance')
+    })
+    .catch(error => {
+      console.log(error)
+      res.redirect('/users/maintenance')
+    })
   })
   .catch(error => {
     console.log(error)
