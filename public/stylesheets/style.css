@@ -82,6 +82,11 @@ nav > a {
   justify-content: center;
 }
 
+nav > img {
+  margin: 0px 30px;
+  width: 80px;
+}
+
 .btn {
   margin: 16px 0;
 }
@@ -112,7 +117,6 @@ nav > a {
 }
 
 #googleBtn {
-  color: white;
   background-color: #00786d;
   border-radius: 100px;
   border: none;
@@ -146,7 +150,7 @@ nav > a {
 
 /* Links inside the dropdown */
 .dropdown-content a {
-  color: white;
+  color: #233E2A;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
